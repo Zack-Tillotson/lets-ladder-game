@@ -1,0 +1,35 @@
+{
+  "name": "lets-ladder-game",
+  "version": "1.0.0",
+  "description": "Zack Tillotson",
+  "main": "gulpfile.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "gulp": "^3.8.11",
+    "gulp-coffee": "^2.3.1",
+    "gutil": "^1.6.4"
+  },
+  "devDependencies": {
+    "coffee-script": "^1.9.2",
+    "gulp": "^3.8.11",
+    "gulp-jasmine": "^2.0.1",
+    "gulp-util": "^3.0.4",
+    "jasmine": "https://github.com/pivotal/jasmine-npm/archive/master.tar.gz",
+    "jasmine-reporters": "^2.0.5"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Zack-Tillotson/lets-ladder-game.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Zack-Tillotson/lets-ladder-game/issues"
+  },
+  "homepage": "https://github.com/Zack-Tillotson/lets-ladder-game"
+}
