@@ -1,4 +1,5 @@
-define ['/assets/scripts/namespace.js'], ->
+define ['/assets/scripts/namespace.js'], (zt) ->
+  
   class zt.ScoreState
 
   	constructor: ->

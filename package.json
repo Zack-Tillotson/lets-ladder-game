@@ -12,6 +12,7 @@
     "gutil": "^1.6.4"
   },
   "devDependencies": {
+    "amd-optimize": "^0.4.3",
     "coffee-script": "^1.9.2",
     "express": "^4.12.3",
     "gulp": "^3.8.11",
