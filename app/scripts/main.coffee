@@ -1,1 +1,2 @@
-window.zt = {}
+require [], ->
+  window.zt = {}

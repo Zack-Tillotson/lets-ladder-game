@@ -13,11 +13,13 @@
   },
   "devDependencies": {
     "coffee-script": "^1.9.2",
+    "express": "^4.12.3",
     "gulp": "^3.8.11",
     "gulp-jasmine": "^2.0.1",
     "gulp-util": "^3.0.4",
     "jasmine": "https://github.com/pivotal/jasmine-npm/archive/master.tar.gz",
-    "jasmine-reporters": "^2.0.5"
+    "jasmine-reporters": "^2.0.5",
+    "requirejs": "^2.1.17"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

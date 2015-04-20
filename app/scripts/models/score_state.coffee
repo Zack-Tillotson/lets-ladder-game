@@ -1,8 +1,10 @@
-class ScoreState
-	constructor: ->
-		@initializeState()
+require ['public/assets/scripts/main'], ->
+  class zt.ScoreState
 
-	initializeState: (level = 1) ->
-		@level = level
-		@money = 0
-		@strikes = 0
+  	constructor: ->
+  		@initializeState()
+
+  	initializeState: (level = 1) ->
+  		@level = level
+  		@money = 0
+  		@strikes = 0
