@@ -1,4 +1,4 @@
-require ['public/assets/scripts/main'], ->
+define ['/assets/scripts/namespace.js'], ->
   class zt.ScoreState
 
   	constructor: ->
