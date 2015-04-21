@@ -26,3 +26,6 @@ Temporary Items
 
 # Public directory stuff
 public/*
+app/scripts/*.js
+app/scripts/*/*.js
+app/scripts/*/*/*.js
