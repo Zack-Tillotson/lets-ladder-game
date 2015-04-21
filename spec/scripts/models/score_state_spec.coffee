@@ -19,15 +19,15 @@ define ['/assets/scripts/namespace.js', '/assets/scripts/models/score_state.js']
         expect(@state.max_strikes).toBe(3)
 
       it "can be given more money", ->
-        @state.doIncreaseMoney(42)
+        @state.increaseMoney(42)
         expect(@state.money).toBe(42)
-        @state.doIncreaseMoney(15)
+        @state.increaseMoney(15)
         expect(@state.money).toBe(57)
 
       it "can be given a strike", ->
-        @state.doStrike()
+        @state.addStrike()
         expect(@state.strikes).toBe(1)
-        @state.doStrike()
+        @state.addStrike()
         expect(@state.strikes).toBe(2)
 
     describe "when passed a non default initial state", ->
@@ -61,7 +61,7 @@ define ['/assets/scripts/namespace.js', '/assets/scripts/models/score_state.js']
       it "can be promoted to the next level", ->
         expect(@state.level).toBe(12)
         expect(@state.strikes).toBe(2)
-        @state.doIncreaseLevel()
+        @state.increaseLevel()
         expect(@state.level).toBe(13)
         expect(@state.strikes).toBe(0)
 
@@ -69,7 +69,7 @@ define ['/assets/scripts/namespace.js', '/assets/scripts/models/score_state.js']
         expect(@state.money).toBe(42)
         expect(@state.level).toBe(12)
         expect(@state.strikes).toBe(2)
-        @state.doStrike()
+        @state.addStrike()
         expect(@state.money).toBe(0)
         expect(@state.level).toBe(11)
         expect(@state.strikes).toBe(0)

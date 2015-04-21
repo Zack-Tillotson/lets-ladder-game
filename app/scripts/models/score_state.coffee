@@ -11,21 +11,21 @@ define ['/assets/scripts/namespace.js'], (zt) ->
       @strikes = initial_state.strikes
       @max_strikes = initial_state.max_strikes
 
-    doIncreaseLevel: ->
+    increaseLevel: ->
       @level++
       @strikes = 0
 
-    doDecreaseLevel: ->
+    decreaseLevel: ->
       @strikes = 0
       @money = 0
       @level-- if @level > 1
 
-    doIncreaseMoney: (amt) ->
+    increaseMoney: (amt) ->
       @money += amt
 
-    doStrike: ->
+    addStrike: ->
       @strikes++
-      @doDecreaseLevel() if @isMaxStrikes()
+      @decreaseLevel() if @isMaxStrikes()
       
     isMaxStrikes: ->
       @strikes >= @max_strikes

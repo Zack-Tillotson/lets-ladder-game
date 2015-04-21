@@ -29,3 +29,6 @@ public/*
 app/scripts/*.js
 app/scripts/*/*.js
 app/scripts/*/*/*.js
+spec/scripts/*.js
+spec/scripts/*/*.js
+spec/scripts/*/*/*.js
