@@ -20,7 +20,7 @@ requirejs ['jquery', 'jasmine', 'jasmine-html', 'jasmine-boot'], ($, jasmineLib,
       '/spec/scripts/models/score_state_spec.js'
       '/spec/scripts/models/door_spec.js'
       '/spec/scripts/models/distribution_spec.js'
-      '/spec/scripts/models/game_state_spec.js'
+      '/spec/scripts/models/lets_ladder_game_spec.js'
     ]
 
     $ ->

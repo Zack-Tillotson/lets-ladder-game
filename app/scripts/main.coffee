@@ -1,3 +1,3 @@
-requirejs ['/assets/scripts/namespace.js', '/assets/scripts/models/score_state.js'], ->
-  tmp = new zt.ScoreState()
-  console.log "ScoreState!", tmp.level, tmp.money, tmp.strikes
+requirejs ['/assets/scripts/namespace.js', '/assets/scripts/models/lets_ladder_game.js'], ->
+  tmp = new zt.LetsLadderGame()
+  console.log "LetsLadderGame!", tmp
