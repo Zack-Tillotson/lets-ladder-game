@@ -23,9 +23,16 @@ define ['/assets/scripts/namespace.js'], (zt) ->
     increaseMoney: (amt) ->
       @money += amt
 
+    decreaseMoney: (amt) ->
+      @increaseMoney -1 * amt
+
     addStrike: ->
       @strikes++
-      @decreaseLevel() if @isMaxStrikes()
+      if @isMaxStrikes()
+        @decreaseLevel()
+        return true
+      else
+        return false
       
     isMaxStrikes: ->
       @strikes >= @max_strikes

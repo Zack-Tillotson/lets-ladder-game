@@ -1,14 +1,14 @@
 define ['/assets/scripts/namespace.js'], (zt) ->
 
     class zt.Door
-      constructor: (options) ->
-        @initializeState options
+      constructor: (success_distribution, reward_distribution) ->
+        @initializeState success_distribution, reward_distribution
 
-      initializeState: (initial_state = Door.defaults) ->
-        @reward = initial_state.reward
-        @result = initial_state.result
-        @success_distribution = initial_state.success_distribution
-        @reward_distribution = initial_state.reward_distribution
+      initializeState: (success_distribution = Door.defaults.success_distribution, reward_distribution = Door.defaults.reward_distribution) ->
+        @reward = Door.defaults.reward
+        @result = Door.defaults.result
+        @success_distribution = success_distribution
+        @reward_distribution = reward_distribution
 
       open: (success_distribution = @success_distribution, reward_distribution = @reward_distribution) ->
         
@@ -32,6 +32,6 @@ define ['/assets/scripts/namespace.js'], (zt) ->
         success_distribution: # Result is either true (succssful) or false (unsuccessful)
           getValue: ->
             true
-        reward_distribution: # Result is a number [0, Inf] which is the amount of money the door is worth
+        reward_distribution: # Result is a number [0, Inf) which is the amount of money the door is worth
           getValue: ->
             0
