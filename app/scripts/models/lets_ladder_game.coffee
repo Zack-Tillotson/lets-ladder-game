@@ -3,6 +3,7 @@ define [
   '/assets/scripts/models/score_state.js'
   '/assets/scripts/models/distribution.js'
   '/assets/scripts/models/door.js'
+  '/assets/scripts/views/lets_ladder_game.js'
 ], (zt) ->
   
   class zt.LetsLadderGame
@@ -36,7 +37,6 @@ define [
       new zt.Distribution
         min: level + door_count
         max: 5 + 2 * (level + door_count)
-        target: door_count
         pattern: 'linear'
         type: 'numeric'
 
