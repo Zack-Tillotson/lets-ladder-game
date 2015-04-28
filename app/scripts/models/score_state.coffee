@@ -11,6 +11,12 @@ define ['/assets/scripts/namespace.js'], (zt) ->
       @strikes = initial_state.strikes
       @max_strikes = initial_state.max_strikes
 
+    getState: ->
+      level: @level
+      money: @money
+      strikes: @strikes
+      max_strikes: @max_strikes
+
     increaseLevel: ->
       @level++
       @strikes = 0

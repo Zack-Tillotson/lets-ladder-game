@@ -15,6 +15,15 @@ define [
       @score_state = options?.score_state or new zt.ScoreState()
       @doors = []
       @resetDoors()
+
+    getState: ->
+      score: @score_state.getState()
+      doors: _.map @doors, (door) -> door.getState()
+      actions:
+        reward_distribution: @getCurrentRewardDistribution()
+        success_distribution: @getCurrentSuccessDistribution()
+        reset_doors_cost: @getCurrentResetDoorsCost()
+        go_up_level_cost: @getCurrentGoUpLevelCost()
       
     resetDoors: ->
       @doors = []
@@ -22,6 +31,9 @@ define [
 
     addDoor: (doors = @doors) ->
        doors.push new zt.Door(@getCurrentSuccessDistribution(), @getCurrentRewardDistribution())
+
+    getCurrentDoor: (doors = @doors) ->
+      current_door = doors[doors.length-1]
 
     #### Current actions' values (cost, reward, etc) ##########
 
@@ -49,7 +61,7 @@ define [
     #### User Actions ##############
 
     chooseOpenDoor: ->
-      current_door = @doors[@doors.length-1]
+      current_door = @getCurrentDoor()
       @doors.push(new zt.Door(@getCurrentSuccessDistribution(), @getCurrentRewardDistribution()))
       switch current_door.open()
         when "success"

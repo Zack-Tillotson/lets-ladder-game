@@ -10,6 +10,12 @@ define ['/assets/scripts/namespace.js'], (zt) ->
         @success_distribution = success_distribution
         @reward_distribution = reward_distribution
 
+      getState: ->
+        reward = @reward
+        result = @result
+        success_distribution = @success_distribution
+        reward_distribution = @reward_distribution
+
       open: (success_distribution = @success_distribution, reward_distribution = @reward_distribution) ->
         
         if @isSuccessful(success_distribution)
