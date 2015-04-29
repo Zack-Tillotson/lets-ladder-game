@@ -3,6 +3,7 @@ define [
   '/assets/scripts/models/score_state.js'
   '/assets/scripts/models/distribution.js'
   '/assets/scripts/models/door.js'
+  '/assets/scripts/models/door_list.js'
   '/assets/scripts/views/lets_ladder_game.js'
 ], (zt) ->
   
@@ -13,67 +14,76 @@ define [
 
   	initializeState: (options) ->
       @score_state = options?.score_state or new zt.ScoreState()
-      @doors = []
+      @door_count = options?.door_count or 5
       @resetDoors()
 
     getState: ->
       score: @score_state.getState()
-      doors: _.map @doors, (door) -> door.getState()
-      actions:
-        reward_distribution: @getCurrentRewardDistribution()
-        success_distribution: @getCurrentSuccessDistribution()
-        reset_doors_cost: @getCurrentResetDoorsCost()
-        go_up_level_cost: @getCurrentGoUpLevelCost()
+      doors: @doors.getState()
+      action_options:
+        reset_doors: 
+          cost: @getCurrentResetDoorsCost()
+          active:  @getCurrentResetDoorsCost() < @score_state.money
       
     resetDoors: ->
-      @doors = []
-      @addDoor()
+      @doors = new zt.DoorList()
+      @addDoor() for i in [1..@door_count]
 
     addDoor: (doors = @doors) ->
-       doors.push new zt.Door(@getCurrentSuccessDistribution(), @getCurrentRewardDistribution())
+      dist = @getRandomCurrentSuccessDistribution()
+      doors.push new zt.Door(dist.target, dist.getValue(), @getCurrentRewardDistribution(@score_state.level, dist.target).getValue())
 
     getCurrentDoor: (doors = @doors) ->
       current_door = doors[doors.length-1]
 
     #### Current actions' values (cost, reward, etc) ##########
 
-    getCurrentSuccessDistribution: (door_count = @doors.length) ->
+    getRandomCurrentSuccessDistribution: (dist = @getCurrentSuccessDistribution()) ->
       new zt.Distribution
         min: 0
         max: 100
-        target: door_count
+        target: dist.getValue()
         pattern: 'linear'
         type: 'boolean'
 
-    getCurrentRewardDistribution: (level = @score_state.level, door_count = @doors.length) ->
+    getCurrentSuccessDistribution: (level = @score_state.level) ->
       new zt.Distribution
-        min: level + door_count
-        max: 5 + 2 * (level + door_count)
+        min: 10
+        max: 50 - 20 / level
         pattern: 'linear'
         type: 'numeric'
 
-    getCurrentResetDoorsCost: (level = @score_state.level) ->
-      level * 10 + 50
+    getCurrentRewardDistribution: (level = @score_state.level, target = 1) ->
+      new zt.Distribution
+        min: Math.pow(1.25, level)
+        max: Math.pow(1.25, level) * target / 10
+        pattern: 'linear'
+        type: 'numeric'
 
-    getCurrentGoUpLevelCost: (level = @score_state.level) ->
-      level * 30 + 100
+     getCurrentResetDoorsCost: (level = @score_state.level) ->
+       Math.ceil(Math.pow(1.25, level) * 3.5)
 
     #### User Actions ##############
 
-    chooseOpenDoor: ->
-      current_door = @getCurrentDoor()
-      @doors.push(new zt.Door(@getCurrentSuccessDistribution(), @getCurrentRewardDistribution()))
-      switch current_door.open()
-        when "success"
-          @score_state.increaseMoney(current_door.reward)
-        when "failure"
-          @resetDoors() if @score_state.addStrike()
+    chooseOpenDoor: (index) ->
+      door = @doors[index]
+      if door.status is "unopened"
+        switch @doors[index].open()
+          when "success"
+            @score_state.increaseMoney(@doors[index].reward)
+          when "failure"
+            @resetDoors() if @score_state.addStrike()
+        if @doors.allDoorsOpened()
+            @score_state.increaseLevel()
+            @resetDoors()
+        return true
+      return false
 
     chooseResetDoors: ->
-      @score_state.decreaseMoney @getCurrentResetDoorsCost()
-      @resetDoors()
-
-    chooseGoUpLevel: ->
-      @score_state.decreaseMoney @getCurrentGoUpLevelCost()
-      @resetDoors()
-      @score_state.increaseLevel()
+      if @getCurrentResetDoorsCost() < @score_state.money
+        @score_state.decreaseMoney @getCurrentResetDoorsCost()
+        @resetDoors()
+        @score_state.resetStrikes()
+        return true
+      else
+        return false

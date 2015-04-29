@@ -39,6 +39,9 @@ define ['/assets/scripts/namespace.js'], (zt) ->
         return true
       else
         return false
+
+    resetStrikes: ->
+      @strikes = 0
       
     isMaxStrikes: ->
       @strikes >= @max_strikes

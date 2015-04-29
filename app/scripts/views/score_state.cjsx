@@ -6,9 +6,9 @@ define [
 
   ScoreStateView = React.createClass
     render: ->
-      <div class="score-state">
-        <div class="level">Level: {this.props.level}</div>
-        <div class="money">Money: {this.props.money}</div>
-        <div class="stikes">Strikes: {this.props.strikes}</div>
-        <div class="max-strikes">Max Strikes: {this.props.max_strikes}</div>
+      <div className="score-state">
+        <div className="level">Level: {@props.score.level}</div>
+        <div className="money">Money: {@props.score.money}</div>
+        <div className="stikes">Strikes: {@props.score.strikes}</div>
+        <div className="max-strikes">Max Strikes: {@props.score.max_strikes}</div>
       </div>
