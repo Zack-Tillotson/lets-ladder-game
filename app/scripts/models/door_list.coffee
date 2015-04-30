@@ -22,6 +22,23 @@ define [
     getState: ->
       state = (@[i].getState() for i in [0...@length])
 
-    allDoorsOpened: ->
-      !(_.find @, (item) -> item.status is "unopened")
+    getDoorsOfStatus: (status = "unopened") ->
+      _.where @, status: status
+
+    getSuccessDoors: ->
+      @getDoorsOfStatus "success"
+
+    getFailureDoors: ->
+      @getDoorsOfStatus "failure"
+
+    getSuccessRewardTotal: ->
+      _.reduce @getSuccessDoors(), ((memo, item) -> memo + item.reward), 0
+
+    getSuccessCount: ->
+      @getSuccessDoors().length
+
+    getFailureCount: ->
+      @getFailureDoors().length
+
+
       
