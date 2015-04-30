@@ -21,7 +21,7 @@ define [
 
     getState: ->
       score: @score_state.getState()
-      doors: @doors.getState()
+      door_list: @doors.getState()
       action_options:
         reset_doors: 
           cost: @getCurrentResetDoorsCost()
@@ -47,8 +47,8 @@ define [
 
     getCurrentSuccessDistribution: (level = @score_state.level) ->
       new zt.Distribution
-        min: 25
-        max: 60 - 30 / level
+        min: 15
+        max: 70 - 40 / Math.pow(level, .67)
         pattern: 'linear'
         type: 'numeric'
 

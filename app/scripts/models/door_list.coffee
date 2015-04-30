@@ -20,7 +20,11 @@ define [
       @[@length++] = item
 
     getState: ->
-      state = (@[i].getState() for i in [0...@length])
+      success_count: @getSuccessCount()
+      failure_count: @getFailureCount()
+      unopened_count: @getUnopenedCount()
+      success_rewards: @getSuccessRewardTotal()
+      doors: (@[i].getState() for i in [0...@length])
 
     getDoorsOfStatus: (status = "unopened") ->
       _.where @, status: status
@@ -39,6 +43,9 @@ define [
 
     getFailureCount: ->
       @getFailureDoors().length
+
+    getUnopenedCount: ->
+      @getDoorsOfStatus("unopened").length
 
 
       

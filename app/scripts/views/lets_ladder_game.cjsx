@@ -22,5 +22,5 @@ define [
       <div className="lets-ladder-game">
         <ScoreStateView score={@state.score} />
         <ActionOptionsView doAction={@doAction} action_options={@state.action_options} />
-        <DoorListView doAction={@doAction} doors={@state.doors} />
+        <DoorListView doAction={@doAction} door_list={@state.door_list} />
       </div>
