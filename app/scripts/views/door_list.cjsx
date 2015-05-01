@@ -17,12 +17,5 @@ define [
         </DoorView>
 
       <div className="door-list">
-        <div className="doors">
-          {doorElements}
-        </div>
-        <div className="status">
-          <div class="status-item">Check Count: {@props.door_list.check_count} (${@props.door_list.exposed_rewards})</div>
-          <div class="status-item">Strike Count: {@props.door_list.strike_count}</div>
-          <div class="status-item">Unopened Count: {@props.door_list.unopened_count}</div>
-        </div>
+        {doorElements}
       </div>

@@ -20,7 +20,7 @@ define [
       action_options:
         reset_doors: 
           cost: reset_door_cost = @game_engine.getResetDoorsCost()
-          active:  reset_door_cost < @score_state.money
+          active:  reset_door_cost < @score_state.money and not @score_state.isGameOver()
 
     #### User Actions ##############
 

@@ -5,7 +5,8 @@ define [
   '/assets/scripts/views/score_state.js'
   '/assets/scripts/views/action_options.js'
   '/assets/scripts/views/door_list.js'
-], (zt, React, ScoreState, ScoreStateView, ActionOptionsView, DoorListView) ->
+  '/assets/scripts/views/game_description.js'
+], (zt, React, ScoreState, ScoreStateView, ActionOptionsView, DoorListView, GameDescriptionView) ->
 
   OpenDoorTheGame = React.createClass
     getInitialState: ->
@@ -19,7 +20,8 @@ define [
       @setState @props.model.getState()
       
     render: ->
-      <div className="lets-ladder-game">
+      <div className="open-door-the-game">
+        <GameDescriptionView />
         <ScoreStateView score={@state.score} />
         <ActionOptionsView doAction={@doAction} action_options={@state.action_options} />
         <DoorListView doAction={@doAction} door_list={@state.door_list} />

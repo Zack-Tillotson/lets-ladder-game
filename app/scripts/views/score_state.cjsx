@@ -6,10 +6,15 @@ define [
 
   ScoreStateView = React.createClass
     render: ->
-      <div className="score-state">
-        <div className="level">Level: {@props.score.level}</div>
-        <div className="money">Money: {@props.score.money}</div>
-        <div className="lives">Lives: {@props.score.lives}</div>
-        <div className="starting-lives">Starting Lives: {@props.score.starting_lives}</div>
-        <div className="is-game-over">Game Over? {if @props.score.is_game_over then "true" else "false"}</div>
+
+      game_over_class = if @props.score.is_game_over then "game_over" else "game_over"
+      lives_elements = (<span className="heart #{if i > @props.score.lives then 'empty-heart' else 'full-heart'}" /> for i in [1..@props.score.lives])
+          
+      <div className="score-state #{game_over_class}">
+        <div className="level">
+          <div className="title">Level</div>
+          <div className="value">{@props.score.level}</div>
+        </div>
+        <div className="money">${@props.score.money}</div>
+        <div className="lives">{lives_elements}</div>
       </div>
