@@ -2,22 +2,38 @@ define [
   '/assets/scripts/namespace.js'
   '/assets/scripts/models/distribution.js'
   '/assets/scripts/models/door.js'
+  '/assets/scripts/models/game_engine.js'
 ], (zt) ->
   
   class zt.DoorList
 
     constructor: (options) ->
-      @initializeState options
+      options = _.extend {}, DoorList.defaults, options
 
-    initializeState: (options) ->
-      if options?.length > 0
+      @game_engine = options.game_engine
+      @door_count = options.door_count
+      @max_check = options.max_check
+      @max_strike = options.max_strike
+
+      if options.length > 0
         @length = options.length
         @[i] = options[i] for i in [0...@length]
       else
-        @length = 0
+        @resetDoors()
 
     push: (item) ->
       @[@length++] = item
+
+    addDoor: ->
+      dist = @game_engine.getRandomCheckDistribution()
+      @push new zt.Door
+        strike_odds: dist.target
+        is_check: dist.getValue()
+        reward: @game_engine.getRewardDistribution(dist.target).getValue()
+
+    resetDoors: ->
+      @length = 0
+      @addDoor() for i in [1..@door_count]
 
     getState: ->
       check_count: @getCheckCount()
@@ -50,5 +66,16 @@ define [
     getUnopenedCount: ->
       @getDoors("unopened").length
 
+    isAtMaxChecks: ->
+      @getCheckCount() >= @max_check
+
+    isAtMaxStrikes: ->
+      @getStrikeCount() >= @max_strike
+    
+    @defaults:
+      door_count: 10
+      max_check: 3
+      max_strike: 3
+      game_engine: new zt.GameEngine()
 
       

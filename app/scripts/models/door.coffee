@@ -1,14 +1,14 @@
 define ['/assets/scripts/namespace.js'], (zt) ->
 
     class zt.Door
-      constructor: (strike_odds, is_check, reward) ->
-        @initializeState strike_odds, is_check, reward
 
-      initializeState: (strike_odds = Door.defaults.strike_odds, is_check = Door.defaults.is_check, reward = Door.defaults.reward) ->
-        @reward = reward
-        @strike_odds = strike_odds
-        @is_check = is_check
-        @status = Door.defaults.status
+      constructor: (options) ->
+        options = _.extend {}, Door.defaults, options
+
+        @reward = options.reward
+        @strike_odds = options.strike_odds
+        @is_check = options.is_check
+        @status = options.status
 
       getState: ->
         reward: @reward

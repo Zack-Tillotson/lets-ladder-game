@@ -3,13 +3,12 @@ define ['/assets/scripts/namespace.js'], (zt) ->
   class zt.ScoreState
 
   	constructor: (options) ->
-  		@initializeState options
+      options = _.extend {}, ScoreState.defaults, options
 
-  	initializeState: (initial_state = ScoreState.defaults) ->
-      @level = initial_state.level
-      @money = initial_state.money
-      @starting_lives = initial_state.starting_lives
-      @lives = initial_state.lives
+      @level = options.level
+      @money = options.money
+      @starting_lives = options.starting_lives
+      @lives = options.lives
 
     getState: ->
       level: @level
@@ -32,8 +31,7 @@ define ['/assets/scripts/namespace.js'], (zt) ->
       @increaseMoney -1 * amt
 
     loseALife: ->
-      @lives--
-      @isGameOver()
+      --@lives
       
     isGameOver: ->
       @lives is 0
