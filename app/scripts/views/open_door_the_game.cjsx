@@ -7,7 +7,7 @@ define [
   '/assets/scripts/views/door_list.js'
 ], (zt, React, ScoreState, ScoreStateView, ActionOptionsView, DoorListView) ->
 
-  LetsLadderGame = React.createClass
+  OpenDoorTheGame = React.createClass
     getInitialState: ->
       @props.model.getState()
 

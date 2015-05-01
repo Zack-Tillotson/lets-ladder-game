@@ -9,7 +9,7 @@ define [
       <div className="score-state">
         <div className="level">Level: {@props.score.level}</div>
         <div className="money">Money: {@props.score.money}</div>
-        <div className="stikes">Strikes: {@props.score.strikes}</div>
-        <div className="max-strikes">Max Strikes: {@props.score.max_strikes}</div>
+        <div className="lives">Lives: {@props.score.lives}</div>
+        <div className="starting-lives">Starting Lives: {@props.score.starting_lives}</div>
         <div className="is-game-over">Game Over? {if @props.score.is_game_over then "true" else "false"}</div>
       </div>

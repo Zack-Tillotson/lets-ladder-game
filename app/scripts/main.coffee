@@ -1,10 +1,10 @@
 requirejs [
   '/assets/scripts/namespace.js'
   'react.js'  
-  '/assets/scripts/models/lets_ladder_game.js'
-  '/assets/scripts/views/lets_ladder_game.js'
-], (zt, React, LetsLadderGame, LetsLadderGameView) ->
+  '/assets/scripts/models/open_door_the_game.js'
+  '/assets/scripts/views/open_door_the_game.js'
+], (zt, React, OpenDoorTheGame, OpenDoorTheGameView) ->
 
-  letsLadderGame = new zt.LetsLadderGame()
+  openDoorTheGame = new zt.OpenDoorTheGame()
 
-  React.render(React.createElement(LetsLadderGameView, {model: letsLadderGame}), document.getElementById('game-container'));
+  React.render(React.createElement(OpenDoorTheGameView, {model: openDoorTheGame}), document.getElementById('game-container'));

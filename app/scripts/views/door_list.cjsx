@@ -13,7 +13,7 @@ define [
     render: ->
       doorElements = @props.door_list.doors.map (door, index) =>
         <DoorView doAction={@onClick} 
-          index={index} reward={door.reward} is_success={door.is_success} success_odds={door.success_odds} status={door.status}>
+          index={index} reward={door.reward} is_check={door.is_check} strike_odds={door.strike_odds} status={door.status}>
         </DoorView>
 
       <div className="door-list">
@@ -21,8 +21,8 @@ define [
           {doorElements}
         </div>
         <div className="status">
-          <div class="status-item">Success Count: {@props.door_list.success_count}</div>
-          <div class="status-item">Failure Count: {@props.door_list.failure_count}</div>
+          <div class="status-item">Check Count: {@props.door_list.check_count} (${@props.door_list.exposed_rewards})</div>
+          <div class="status-item">Strike Count: {@props.door_list.strike_count}</div>
           <div class="status-item">Unopened Count: {@props.door_list.unopened_count}</div>
         </div>
       </div>

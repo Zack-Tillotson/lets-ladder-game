@@ -1,4 +1,4 @@
-define ['/assets/scripts/namespace.js', 'math-1.5.1.min.js'], (zt) ->
+define ['/assets/scripts/namespace.js'], (zt) ->
 
   class zt.Distribution
     constructor: (options) ->
@@ -14,9 +14,11 @@ define ['/assets/scripts/namespace.js', 'math-1.5.1.min.js'], (zt) ->
     getValue: ->
       val = switch @pattern
         when "linear"
-          mathjs.randomInt(@min, @max)
-
+          @getRandomInt(@min, @max)
       @convertToType val
+
+    getRandomInt: (min = @min, max = @max) ->
+      Math.floor(Math.random() * (max - min) + min)
 
     convertToType: (value) ->
 

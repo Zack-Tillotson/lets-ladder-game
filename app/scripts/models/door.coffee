@@ -1,26 +1,26 @@
 define ['/assets/scripts/namespace.js'], (zt) ->
 
     class zt.Door
-      constructor: (success_odds, is_success, reward) ->
-        @initializeState success_odds, is_success, reward
+      constructor: (strike_odds, is_check, reward) ->
+        @initializeState strike_odds, is_check, reward
 
-      initializeState: (success_odds = Door.defaults.success_odds, is_success = Door.defaults.is_success, reward = Door.defaults.reward) ->
+      initializeState: (strike_odds = Door.defaults.strike_odds, is_check = Door.defaults.is_check, reward = Door.defaults.reward) ->
         @reward = reward
-        @success_odds = success_odds
-        @is_success = is_success
+        @strike_odds = strike_odds
+        @is_check = is_check
         @status = Door.defaults.status
 
       getState: ->
         reward: @reward
         status: @status
-        is_success: @is_success
-        success_odds: @success_odds
+        is_check: @is_check
+        strike_odds: @strike_odds
 
-      open: (is_success = @is_success) ->
-        @status = if is_success then 'success' else 'failure'
+      open: (is_check = @is_check) ->
+        @status = if is_check then 'check' else 'strike'
           
       @defaults:
         reward: 0        
-        status: 'unopened' # [unopened, success, failure]
-        success_odds: 1
-        is_success: true
+        status: 'unopened' # [unopened, check, strike]
+        strike_odds: 1
+        is_check: true

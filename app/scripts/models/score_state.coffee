@@ -8,16 +8,15 @@ define ['/assets/scripts/namespace.js'], (zt) ->
   	initializeState: (initial_state = ScoreState.defaults) ->
       @level = initial_state.level
       @money = initial_state.money
-      @strikes = initial_state.strikes
-      @max_strikes = initial_state.max_strikes
-      @is_game_over = initial_state.is_game_over
+      @starting_lives = initial_state.starting_lives
+      @lives = initial_state.lives
 
     getState: ->
       level: @level
       money: @money
-      strikes: @strikes
-      max_strikes: @max_strikes
-      is_game_over: @is_game_over
+      lives: @lives
+      starting_lives: @starting_lives
+      is_game_over: @isGameOver()
 
     increaseLevel: ->
       @level++
@@ -32,22 +31,15 @@ define ['/assets/scripts/namespace.js'], (zt) ->
     decreaseMoney: (amt) ->
       @increaseMoney -1 * amt
 
-    addStrike: ->
-      @strikes++
-      @setGameOver @isMaxStrikes()
+    loseALife: ->
+      @lives--
+      @isGameOver()
       
-    resetStrikes: ->
-      @strikes = 0
-      
-    isMaxStrikes: ->
-      @strikes >= @max_strikes
-
-    setGameOver: (is_game_over = false)->
-      @is_game_over = is_game_over
+    isGameOver: ->
+      @lives is 0
 
     @defaults:
       level: 1
       money: 0
-      strikes: 0
-      max_strikes: 3
-      is_game_over: false
+      starting_lives: 3
+      lives: 3

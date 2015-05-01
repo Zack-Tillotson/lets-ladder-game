@@ -20,32 +20,35 @@ define [
       @[@length++] = item
 
     getState: ->
-      success_count: @getSuccessCount()
-      failure_count: @getFailureCount()
+      check_count: @getCheckCount()
+      strike_count: @getStrikeCount()
       unopened_count: @getUnopenedCount()
-      success_rewards: @getSuccessRewardTotal()
+      exposed_rewards: @getRewardedTotal()
       doors: (@[i].getState() for i in [0...@length])
 
-    getDoorsOfStatus: (status = "unopened") ->
-      _.where @, status: status
+    getDoors: (status) ->
+      if status?
+        _.where @, status: status
+      else
+        @
 
-    getSuccessDoors: ->
-      @getDoorsOfStatus "success"
+    getCheckDoors: ->
+      @getDoors "check"
 
-    getFailureDoors: ->
-      @getDoorsOfStatus "failure"
+    getStrikeDoors: ->
+      @getDoors "strike"
 
-    getSuccessRewardTotal: ->
-      _.reduce @getSuccessDoors(), ((memo, item) -> memo + item.reward), 0
+    getRewardedTotal: ->
+      _.reduce @getCheckDoors(), ((memo, item) -> memo + item.reward), 0
 
-    getSuccessCount: ->
-      @getSuccessDoors().length
+    getCheckCount: ->
+      @getCheckDoors().length
 
-    getFailureCount: ->
-      @getFailureDoors().length
+    getStrikeCount: ->
+      @getStrikeDoors().length
 
     getUnopenedCount: ->
-      @getDoorsOfStatus("unopened").length
+      @getDoors("unopened").length
 
 
       
