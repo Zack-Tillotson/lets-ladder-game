@@ -7,9 +7,9 @@ define [
       
     render: ->
       <div className="wordy-desc">
-        <div className="main-c2a">Open 3 Doors To Level Up</div>
+        <div className="main-c2a">Get 3 <span className="fa fa-check check" /> To Level Up</div>
         <ul className="more-info">
-          <li>However, 3 <span className="strike" /> and you lose a life.</li>
-          <li>Once you're out of lives it's game over!</li>
+          <li>However, 3 <span className="fa fa-times strike" /> and you lose a life.</li>
+          <li>How much money can you earn before it's game over?</li>
         </ul>
       </div>

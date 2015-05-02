@@ -1,8 +1,10 @@
 require('coffee-script/register');
+
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var coffee = require('gulp-coffee');
 var cjsx = require('gulp-cjsx');
+var sass = require('gulp-sass');
 
 gulp.task('coffee', function() {
   gulp.src('app/scripts/**/*.coffee')
@@ -22,4 +24,10 @@ gulp.task('cjsx', function() {
     .pipe(gulp.dest('public/assets/scripts/views/'));
 });
 
-gulp.task('default', ['coffee', 'spec-coffee', 'cjsx']);
+gulp.task('sass', function () {
+  gulp.src('./app/styles/**.sass')
+    .pipe(sass({indentedSyntax: true}))
+    .pipe(gulp.dest('./public/assets/styles'));
+});
+
+gulp.task('default', ['coffee', 'spec-coffee', 'cjsx', 'sass']);

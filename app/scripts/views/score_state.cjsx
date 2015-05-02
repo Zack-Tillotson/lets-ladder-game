@@ -8,7 +8,7 @@ define [
     render: ->
 
       game_over_class = if @props.score.is_game_over then "game_over" else "game_over"
-      lives_elements = (<span className="heart #{if i > @props.score.lives then 'empty-heart' else 'full-heart'}" /> for i in [1..@props.score.lives])
+      lives_elements = (<span className="fa heart #{if i > @props.score.lives then 'fa-heart-o lost-heart' else 'fa-heart'}" /> for i in [1..@props.score.starting_lives])
           
       <div className="score-state #{game_over_class}">
         <div className="level">

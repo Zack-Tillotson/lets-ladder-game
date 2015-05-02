@@ -20,8 +20,7 @@ define [
       @setState @props.model.getState()
       
     render: ->
-      <div className="open-door-the-game">
-        <GameDescriptionView />
+      <div className="open-door-the-game odtg">
         <ScoreStateView score={@state.score} />
         <ActionOptionsView doAction={@doAction} action_options={@state.action_options} />
         <DoorListView doAction={@doAction} door_list={@state.door_list} />

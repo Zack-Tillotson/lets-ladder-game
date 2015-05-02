@@ -28,12 +28,14 @@ define [
       return if @score_state.isGameOver() or @doors[index].status isnt "unopened"
 
       @doors[index].open()
+      
       if @doors.isAtMaxChecks()
         @score_state.increaseMoney @doors.getRewardedTotal()
         @game_engine.level = @score_state.increaseLevel()
         @doors.resetDoors()
       else if @doors.isAtMaxStrikes()
-        @doors.resetDoors() if @game_engine.level = @score_state.loseALife()
+        @game_engine.level--
+        @doors.resetDoors() if @score_state.loseALife()
 
     chooseResetDoors: ->
       return if @score_state.isGameOver()

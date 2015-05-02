@@ -7,13 +7,14 @@ define [
 
     render: ->
 
-      reward_view = switch @props.status
-        when "unopened" then ""
-        when "strike" then ""
-        when "check" then "$#{@props.reward}"
-
-      risk_class = "risk_#{Math.ceil(@props.strike_odds / 5)}"
+      result_class = switch @props.status
+        when "unopened" then "fa-question"
+        when "check" then "fa-check"
+        when "strike" then "fa-times"
+      result_text = if @props.status is "check" then "$#{@props.reward}" else ""
+      risk_class = "risk-#{Math.ceil(@props.strike_odds / 100 * 5)}"
 
       <div className="door option-target #{@props.status} #{risk_class}" onClick={@props.doAction} data-action="open_door" data-index={@props.index}>
-        <span className="reward #{@props.status}">{reward_view}</span>
+        <span className="result fa #{result_class}"></span>
+        <span className="reward">&nbsp;{result_text}</span>
       </div>

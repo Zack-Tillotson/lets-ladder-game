@@ -1,0 +1,137 @@
+.odtg
+  *
+    box-sizing: border-box
+
+  .score-state
+    text-align: center
+    font-size: 25px
+    font-weight: bold
+    margin-bottom: 15px
+
+    .level
+      display: inline-block
+      margin: 0 50px
+      text-align: center
+
+      .title
+        color: #555
+        display: inline-block
+
+      .value
+        display: inline-block
+        margin-left: 10px
+
+    .money
+      display: inline-block
+      margin: 0 50px
+      text-align: center
+
+    .lives
+      display: inline-block
+      margin: 0 50px
+      text-align: center
+      
+      .heart
+        color: red
+        margin-left: 2px
+
+        &.lost-heart
+          color: black
+
+  .action-options
+
+    .option-open
+      display: inline-block
+      width: 398px
+      background: #eee
+      padding: 10px
+
+    .option-verbage
+      display: inline-block
+      width: 324px
+      text-align: center  
+      padding: 10px 0
+
+    .option-reset
+      display: inline-block
+      width: 300px
+      padding: 10px 0
+      font-weight: bold
+
+      .cost
+        margin-left: 10px
+
+  .door-list
+    background: #eee
+
+    .door
+      display: inline-block
+      width: calc(20% - 30px)
+      margin: 15px
+      text-align: center
+      font-size: 25px
+      box-shadow: 0px 0px 8px #666
+      padding-top: 10px
+      padding-bottom: 10px
+
+      &.check
+        box-shadow: 0 0 5px 3px green
+
+      &.strike
+        box-shadow: 0 0 5px 3px red
+
+      .result
+
+      .reward
+        display: block
+        font-size: 15px
+
+      &.risk-1
+        background: rgb(138, 255, 135)
+
+      &.risk-2
+        background: rgb(183, 255, 135)
+
+      &.risk-3
+        background: rgb(202, 255, 135)
+
+      &.risk-4
+        background: rgb(220, 255, 135)
+
+      &.risk-5
+        background: rgb(243, 255, 135)
+
+      &.risk-6
+        background: rgb(255, 249, 135)
+
+      &.risk-7
+        background: rgb(255, 231, 135)
+
+      &.risk-8
+        background: rgb(255, 208, 135)
+
+      &.risk-9
+        background: rgb(255, 135, 135)
+
+      &.risk-10
+        background: #FC4545
+
+@media screen and (max-width: 450px) 
+
+  .odtg
+
+    .score-state
+      padding-bottom: 10px
+
+      .level, .money, .lives
+        margin: 0 10px
+
+    .action-options
+      .option-open, .option-verbage, .option-reset
+        width: auto
+        background: none
+        padding: 10px 3px
+
+    .door-list
+      .door
+        width: calc(50% - 30px)
