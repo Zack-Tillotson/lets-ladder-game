@@ -12,7 +12,7 @@ define [
         when "check" then "fa-check"
         when "strike" then "fa-times"
       result_text = if @props.status is "check" then "$#{@props.reward}" else ""
-      risk_class = "risk-#{Math.ceil(@props.strike_odds / 100 * 5)}"
+      risk_class = "risk-#{Math.ceil(@props.strike_odds / 10)}"
 
       <div className="door option-target #{@props.status} #{risk_class}" onClick={@props.doAction} data-action="open_door" data-index={@props.index}>
         <span className="result fa #{result_class}"></span>

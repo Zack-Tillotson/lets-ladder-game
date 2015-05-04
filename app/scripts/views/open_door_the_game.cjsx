@@ -10,15 +10,20 @@ define [
 
   OpenDoorTheGame = React.createClass
     getInitialState: ->
-      @props.model.getState()
+      @props.model.getState() 
 
     doAction: (action, value) ->
-      switch action
+
+      isDelayed = switch action
         when 'open_door' then @props.model.chooseOpenDoor(value)
         when 'reset_doors' then @props.model.chooseResetDoors()
 
       @setState @props.model.getState()
-      
+
+      if isDelayed
+        @props.model.emitter.once 'ui_event', => 
+          @setState @props.model.getState()
+
     render: ->
       <div className="open-door-the-game odtg">
         <ScoreStateView score={@state.score} />
