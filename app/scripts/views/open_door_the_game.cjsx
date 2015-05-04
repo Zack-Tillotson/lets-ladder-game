@@ -6,7 +6,8 @@ define [
   'assets/scripts/views/action_options.js'
   'assets/scripts/views/door_list.js'
   'assets/scripts/views/help.js'
-], (zt, React, ScoreState, ScoreStateView, ActionOptionsView, DoorListView, HelpView) ->
+  'assets/scripts/views/door_spectrum.js'
+], (zt, React, ScoreState, ScoreStateView, ActionOptionsView, DoorListView, HelpView, DoorSpectrumView) ->
 
   OpenDoorTheGame = React.createClass
     getInitialState: ->
@@ -29,5 +30,6 @@ define [
         <ScoreStateView score={@state.score} />
         <ActionOptionsView doAction={@doAction} action_options={@state.action_options} />
         <DoorListView doAction={@doAction} door_list={@state.door_list} />
+        <DoorSpectrumView />
         <HelpView initiallyOpen=true />
       </div>
