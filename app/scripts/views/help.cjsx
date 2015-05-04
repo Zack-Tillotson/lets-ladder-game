@@ -19,7 +19,7 @@ define [
             <li className="help-item">Choose doors to open and earn money!</li>
             <li className="help-item">Get 3 <span className="fa fa-check"> </span>s to win money and go up a level.</li>
             <li className="help-item">However, if you open 3 <span className="fa fa-times"> </span>s then you lose a life and go down a level.</li>
-            <li className="help-item">Spend your winnings to Reset the level if you think you might open that third <span class="strike" />!</li>
+            <li className="help-item">Spend your winnings to Reset the level if you think you might open that third <span className="strike" />!</li>
           </ol>
         </div>
       </div>
