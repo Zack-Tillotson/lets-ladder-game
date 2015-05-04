@@ -1,4 +1,4 @@
-define ['/assets/scripts/namespace.js'], (zt) ->
+define ['assets/scripts/namespace.js'], (zt) ->
 
     class zt.Door
 

@@ -1,7 +1,7 @@
 define [
-  '/assets/scripts/namespace.js'
+  'assets/scripts/namespace.js'
   'react.js'
-  '/assets/scripts/views/door.js'
+  'assets/scripts/views/door.js'
 ], (zt, React, DoorView) ->
 
   DoorListView = React.createClass

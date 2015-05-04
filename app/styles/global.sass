@@ -1,6 +1,8 @@
 .odtg
   *
     box-sizing: border-box
+  font-family: sans-serif
+  position: relative
 
   .score-state
     text-align: center
@@ -116,6 +118,41 @@
       &.risk-10
         background: #FC4545
 
+  .help-view
+
+    .help-toggle
+      position: absolute
+      top: 0
+      right: 5px
+      font-size: 30px
+      color: rgb(255, 245, 59);
+      text-shadow: 0 0 5px black;
+
+    .help-overlay
+      position: fixed
+      left: 0
+      right: 0
+      top: 0
+      bottom: 0
+      background: rgba(0,0,0,.85)
+      z-index: 10
+      color: #e9e9e9
+      font-size: 20px
+      margin: 0
+      
+      &.inactive
+        display: none
+
+      &.active
+        display: block
+
+      .help-items
+        width: 1024px
+        margin: 150px auto 0 auto
+
+        .help-item
+          margin-top: 10px
+
 @media screen and (max-width: 450px) 
 
   .odtg
@@ -135,3 +172,11 @@
     .door-list
       .door
         width: calc(50% - 30px)
+
+    .help-view
+
+      .help-overlay
+
+        .help-items
+          width: 100%
+          margin: 75px 0 0 0

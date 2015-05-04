@@ -1,5 +1,5 @@
 define [
-  '/assets/scripts/namespace.js'
+  'assets/scripts/namespace.js'
 ], (zt) ->
   
   class zt.GameEngine

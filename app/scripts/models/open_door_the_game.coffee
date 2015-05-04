@@ -1,10 +1,10 @@
 define [
-  '/assets/scripts/namespace.js'
-  '/assets/scripts/models/score_state.js'
-  '/assets/scripts/models/distribution.js'
-  '/assets/scripts/models/door.js'
-  '/assets/scripts/models/door_list.js'
-  '/assets/scripts/models/game_engine.js'
+  'assets/scripts/namespace.js'
+  'assets/scripts/models/score_state.js'
+  'assets/scripts/models/distribution.js'
+  'assets/scripts/models/door.js'
+  'assets/scripts/models/door_list.js'
+  'assets/scripts/models/game_engine.js'
 ], (zt) ->
   
   class zt.OpenDoorTheGame
@@ -34,7 +34,7 @@ define [
         @game_engine.level = @score_state.increaseLevel()
         @doors.resetDoors()
       else if @doors.isAtMaxStrikes()
-        @game_engine.level--
+        @game_engine.level = @score_state.decreaseLevel()
         @doors.resetDoors() if @score_state.loseALife()
 
     chooseResetDoors: ->

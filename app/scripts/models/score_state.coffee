@@ -1,4 +1,4 @@
-define ['/assets/scripts/namespace.js'], (zt) ->
+define ['assets/scripts/namespace.js'], (zt) ->
   
   class zt.ScoreState
 
@@ -21,8 +21,8 @@ define ['/assets/scripts/namespace.js'], (zt) ->
       @level++
 
     decreaseLevel: ->
-      @money = 0
       @level-- if @level > 1
+      @level
 
     increaseMoney: (amt) ->
       @money += amt

@@ -1,7 +1,7 @@
 define [
-  '/assets/scripts/namespace.js'
+  'assets/scripts/namespace.js'
   'react.js'
-  '/assets/scripts/models/score_state.js'
+  'assets/scripts/models/score_state.js'
 ], (zt, React, ScoreState) ->
 
   ScoreStateView = React.createClass
