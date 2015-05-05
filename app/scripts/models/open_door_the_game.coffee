@@ -1,16 +1,18 @@
 define [
   'assets/scripts/namespace.js'
   'eventemitter2.js'
+  'assets/scripts/models/data_store.js'
   'assets/scripts/models/score_state.js'
   'assets/scripts/models/distribution.js'
   'assets/scripts/models/door.js'
   'assets/scripts/models/door_list.js'
   'assets/scripts/models/game_engine.js'
-], (zt, EventEmitter2) ->
+], (zt, EventEmitter2, DataStore) ->
   
   class zt.OpenDoorTheGame
 
   	constructor: (options) ->
+
       @game_engine = new zt.GameEngine()
       @score_state = new zt.ScoreState(game_engine: @game_engine)
       @doors = new zt.DoorList(game_engine: @game_engine)
@@ -29,34 +31,42 @@ define [
 
     #### User Actions ##############
 
-    chooseOpenDoor: (index) ->
+    delayAction: (fn, waitTime = 1000) ->
+      @emitter.once 'ui_wait', fn
+      @allow_events = false
+      setTimeout( => 
+        @allow_events = true
+        @emitter.emit 'ui_wait'
+        @emitter.emit 'state_change'
+      , waitTime)
+
+    actionOpenDoor: (index) ->
       return if not @allow_events or @score_state.isGameOver() or @doors[index].status isnt "unopened"
 
       @doors[index].open()
       
       if @doors.isAtMaxChecks()
+        
         @score_state.increaseMoney @doors.getRewardedTotal()
         @game_engine.level = @score_state.increaseLevel()
+        
         @delayAction =>
           @doors.resetDoors()
 
       else if @doors.isAtMaxStrikes()
+
         @game_engine.level = @score_state.decreaseLevel()
         @delayAction( =>
           @doors.resetDoors()
         ) if @score_state.loseALife()
 
-    chooseResetDoors: ->
+      @emitter.emit 'state_change'
+
+    actionResetDoors: ->
       return if not @allow_events or @score_state.isGameOver()
 
       if @game_engine.getResetDoorsCost() < @score_state.money
         @score_state.decreaseMoney @game_engine.getResetDoorsCost()
         @doors.resetDoors()
 
-    delayAction: (fn, waitTime = 1000) ->
-      @emitter.once 'ui_event', fn
-      @allow_events = false
-      setTimeout( => 
-        @allow_events = true
-        @emitter.emit 'ui_event'
-      , waitTime)
+      @emitter.emit 'state_change'

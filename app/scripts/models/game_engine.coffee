@@ -4,10 +4,12 @@ define [
   
   class zt.GameEngine
 
+
     constructor: (options) ->
       options = _.extend {}, GameEngine.defaults, options
       
       @level = options.level
+      @growth_factor = options.growth_factor
 
     getRandomCheckDistribution: (dist = @getCheckDistribution()) ->
       new zt.Distribution
@@ -19,20 +21,21 @@ define [
 
     getCheckDistribution: (level = @level) ->
       new zt.Distribution
-        min: 15
+        min: 40 - 25 / Math.pow(level, .25)
         max: 80 - 50 / Math.pow(level, .5)
         pattern: 'linear'
         type: 'numeric'
 
     getRewardDistribution: (target = 1, level = @level)  ->
       new zt.Distribution
-        min: Math.pow(1.25, level)
-        max: Math.pow(1.25, level) * target / 10
+        min: Math.pow(@growth_factor, level)
+        max: Math.pow(@growth_factor, level) * target / 10
         pattern: 'linear'
         type: 'numeric'
 
     getResetDoorsCost: (level = @level) ->
-      Math.ceil(Math.pow(1.25, level) * 3.5)
+      Math.ceil(Math.pow(@growth_factor, level) * 3.5)
 
     @defaults:
       level: 1
+      growth_factor: 1.2

@@ -7,29 +7,16 @@ define [
   'assets/scripts/views/door_list.js'
   'assets/scripts/views/help.js'
   'assets/scripts/views/door_spectrum.js'
-], (zt, React, ScoreState, ScoreStateView, ActionOptionsView, DoorListView, HelpView, DoorSpectrumView) ->
+  'assets/scripts/views/high_score_data.js'
+], (zt, React, ScoreState, ScoreStateView, ActionOptionsView, DoorListView, HelpView, DoorSpectrumView, HighScoreDataView) ->
 
   OpenDoorTheGame = React.createClass
-    getInitialState: ->
-      @props.model.getState() 
-
-    doAction: (action, value) ->
-
-      isDelayed = switch action
-        when 'open_door' then @props.model.chooseOpenDoor(value)
-        when 'reset_doors' then @props.model.chooseResetDoors()
-
-      @setState @props.model.getState()
-
-      if isDelayed
-        @props.model.emitter.once 'ui_event', => 
-          @setState @props.model.getState()
-
     render: ->
       <div className="open-door-the-game odtg">
-        <ScoreStateView score={@state.score} />
-        <ActionOptionsView doAction={@doAction} action_options={@state.action_options} />
-        <DoorListView doAction={@doAction} door_list={@state.door_list} />
+        <ScoreStateView score={@props.model_state.score} />
+        <ActionOptionsView doAction={@props.event_handler} action_options={@props.model_state.action_options} />
+        <DoorListView doAction={@props.event_handler} door_list={@props.model_state.door_list} />
         <DoorSpectrumView />
         <HelpView initiallyOpen=true />
+        <HighScoreDataView model={@props.high_scores} />
       </div>
