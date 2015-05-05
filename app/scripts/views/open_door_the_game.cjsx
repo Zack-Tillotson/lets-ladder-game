@@ -18,5 +18,5 @@ define [
         <DoorListView doAction={@props.event_handler} door_list={@props.model_state.door_list} />
         <DoorSpectrumView />
         <HelpView initiallyOpen=true />
-        <HighScoreDataView model={@props.high_scores} />
+        <HighScoreDataView high_scores={@props.high_scores} />
       </div>
