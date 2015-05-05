@@ -40,4 +40,4 @@ define ['assets/scripts/namespace.js'], (zt) ->
       level: 1
       money: 0
       starting_lives: 3
-      lives: 1 #XXX 3
+      lives: 3
