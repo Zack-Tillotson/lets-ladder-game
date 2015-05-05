@@ -75,7 +75,7 @@ define [
     @defaults:
       door_count: 10
       max_check: 3
-      max_strike: 3
+      max_strike: 1 # XXX 3
       game_engine: new zt.GameEngine()
 
       

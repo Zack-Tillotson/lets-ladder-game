@@ -24,9 +24,10 @@ requirejs [
   model.emitter.on 'state_change', =>
     update_model_state()
 
+  model.emitter.on 'game_over', (game_data) ->
+    high_score_data.saveGameInformation game_data
+
   high_score_data.emitter.on 'state_change', =>
     update_model_state()
-
-  window.x = high_score_data
 
   update_model_state()

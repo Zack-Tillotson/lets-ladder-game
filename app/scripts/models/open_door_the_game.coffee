@@ -56,9 +56,11 @@ define [
       else if @doors.isAtMaxStrikes()
 
         @game_engine.level = @score_state.decreaseLevel()
-        @delayAction( =>
-          @doors.resetDoors()
-        ) if @score_state.loseALife()
+        if @score_state.loseALife()
+          @delayAction =>
+            @doors.resetDoors()
+        else
+          @emitter.emit 'game_over', @getState()
 
       @emitter.emit 'state_change'
 
