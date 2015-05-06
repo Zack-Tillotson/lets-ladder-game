@@ -5,7 +5,8 @@ define [
 ], (zt, EventEmitter2, Firebase2_4) ->
   
   class zt.HighScoreData
-    @max_scores = 20
+    @max_scores = 10
+    @recent_time = 1000 * 60 * 60 * 1 # 1 hour!
 
     constructor: (options) ->
 
@@ -21,10 +22,13 @@ define [
 
       @fb.on 'value', (data) =>
         @global_scores = (item for key, item of data.val())
+          .sort (a, b) -> a.score < b.score
           .splice(0, HighScoreData.max_scores)
         @local_scores = (item for key, item of data.val() when item.who is @fb.getAuth()?.auth.uid)
+          .sort (a, b) -> a.score < b.score
           .splice(0, HighScoreData.max_scores)
-        @recent_scores = (item for key, item of data.val() when item.date > new Date().getTime() - 1000 * 60 * 60 * 24 * 7)
+        @recent_scores = (item for key, item of data.val() when item.date > new Date().getTime() - HighScoreData.recent_time)
+          .sort (a, b) -> a.score < b.score
           .splice(0, HighScoreData.max_scores)
 
         @emitter.emit 'state_change'
