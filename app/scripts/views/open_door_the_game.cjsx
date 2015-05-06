@@ -17,6 +17,6 @@ define [
         <ActionOptionsView doAction={@props.event_handler} action_options={@props.model_state.action_options} />
         <DoorListView doAction={@props.event_handler} door_list={@props.model_state.door_list} />
         <DoorSpectrumView />
-        <HelpView initiallyOpen=true />
+        <HelpView initiallyOpen=false />
         <HighScoreDataView high_scores={@props.high_scores} />
       </div>

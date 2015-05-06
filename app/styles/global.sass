@@ -29,7 +29,7 @@
     text-align: center
     font-size: 25px
     font-weight: bold
-    margin-bottom: 15px
+    margin: 0 15px 15px 15px
 
     .level
       display: inline-block
@@ -159,6 +159,42 @@
 
         .help-item
           margin-top: 10px
+
+  .high-scores-data-view
+
+    .high-scores-toggle
+      position: absolute
+      top: 0
+      left: 5px
+      font-size: 30px
+      color: rgb(255, 245, 59);
+      text-shadow: 0 0 5px black;
+
+    .high-scores-overlay
+      position: fixed
+      left: 0
+      right: 0
+      top: 0
+      bottom: 0
+      background: rgba(0,0,0,.90)
+      z-index: 10
+      color: #e9e9e9
+      font-size: 15px
+      margin: 0
+
+      &.inactive
+        display: none
+
+      &.active
+        display: block
+
+      .high-scores-list
+        width: 1024px
+        margin: 0px auto 0 auto
+
+        .list-title
+          font-size: 20px
+
 
 //@media screen and (max-width: 450px)
 @media screen and (max-width: 1024px)

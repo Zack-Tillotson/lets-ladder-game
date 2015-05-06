@@ -1,23 +1,23 @@
 define [
   'assets/scripts/namespace.js'
   'react.js'
-], (zt, React) ->
+  'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js'
+], (zt, React, moment) ->
 
   HighScoreListView = React.createClass
 
     render: ->
 
       high_score_elements = ((
-        <li class="high-score-item">
-          <span class="score">{item.score}</span>
-          <span class="who">{item.who}</span>
-          <span class="date">{item.date}</span>
+        <li className="list-item">
+          <span className="score">{item.score}</span>
+          <span className="date">{moment(item.date).format("MMMM Do YYYY, h:mm:ss a")}</span>
         </li>
       ) for item in @props.high_scores or {})
         
-      <div class="high-score-list">
-        <div class="list-title">{@props.title}</div>
-        <ol className="high-scores-container">
+      <div className="high-scores-list">
+        <div className="list-title">{@props.title}</div>
+        <ol className="list-data">
           {high_score_elements}        
         </ol>
       </div>

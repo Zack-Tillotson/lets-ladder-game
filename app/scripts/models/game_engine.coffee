@@ -21,7 +21,7 @@ define [
 
     getCheckDistribution: (level = @level) ->
       new zt.Distribution
-        min: 40 - 25 / Math.pow(level, .25)
+        min: 15
         max: 80 - 50 / Math.pow(level, .5)
         pattern: 'linear'
         type: 'numeric'
