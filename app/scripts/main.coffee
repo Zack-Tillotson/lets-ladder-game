@@ -1,9 +1,5 @@
 requirejs [
-  'assets/scripts/namespace.js'
-  'react.js'  
-  'assets/scripts/models/open_door_the_game.js'
-  'assets/scripts/views/open_door_the_game.js'
-  'assets/scripts/models/high_score_data.js'
+  'zt', 'react', 'open_door_the_game', 'open_door_the_game_view', 'high_score_data'
 ], (zt, React, OpenDoorTheGame, OpenDoorTheGameView, HighScoreData) ->
 
   model = new zt.OpenDoorTheGame()
