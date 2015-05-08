@@ -1,8 +1,4 @@
-define [
-  'assets/scripts/namespace.js'
-  'eventemitter2.js'
-  'https://cdn.firebase.com/js/client/2.2.4/firebase.js'
-], (zt, EventEmitter2, Firebase2_4) ->
+define ['namespace', 'libs/eventemitter2', 'firebase'], (zt, EventEmitter2, Firebase2_4) ->
   
   class zt.HighScoreData
     @max_scores = 10

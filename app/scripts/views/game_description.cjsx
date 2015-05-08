@@ -1,7 +1,4 @@
-define [
-  'assets/scripts/namespace.js'
-  'react.js'
-], (zt, React) ->
+define ['namespace', 'react'], (zt, React) ->
 
   GameDescription = React.createClass
       

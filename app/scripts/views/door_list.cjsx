@@ -1,8 +1,4 @@
-define [
-  'assets/scripts/namespace.js'
-  'react.js'
-  'assets/scripts/views/door.js'
-], (zt, React, DoorView) ->
+define ['namespace', 'react', 'views/door'], (zt, React, DoorView) ->
 
   DoorListView = React.createClass
 

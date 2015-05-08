@@ -1,8 +1,4 @@
-define [
-  'assets/scripts/namespace.js'
-  'react.js'
-  'assets/scripts/models/score_state.js'
-], (zt, React, ScoreState) ->
+define ['namespace', 'react', 'models/score_state'], (zt, React, ScoreState) ->
 
   ScoreStateView = React.createClass
     render: ->

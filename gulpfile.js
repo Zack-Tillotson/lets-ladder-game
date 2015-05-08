@@ -7,8 +7,9 @@ var cjsx = require('gulp-cjsx');
 var sass = require('gulp-sass');
 var del = require('del');
 
-gulp.task('clean', function() {
+gulp.task('clean', function(cb) {
   del(['public/**/*']);
+  cb();
 });
 
 gulp.task('coffee', function() {
@@ -55,7 +56,4 @@ gulp.task('spec-files', function () {
 gulp.task('build-development', ['coffee', 'spec-coffee', 'cjsx', 'sass', 'js-libs', 'html-files', 'spec-files']);
 gulp.task('build-production', ['coffee', 'spec-coffee', 'cjsx', 'sass', 'js-libs', 'html-files']);
 
-gulp.task('development', ['clean', 'build-development']);
-gulp.task('production', ['clean', 'build-production']);
-
-gulp.task('default', ['development']);
+gulp.task('default', ['build-development']);

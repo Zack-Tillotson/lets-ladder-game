@@ -1,13 +1,12 @@
 define [
-  'assets/scripts/namespace.js'
-  'eventemitter2.js'
-  'assets/scripts/models/data_store.js'
-  'assets/scripts/models/score_state.js'
-  'assets/scripts/models/distribution.js'
-  'assets/scripts/models/door.js'
-  'assets/scripts/models/door_list.js'
-  'assets/scripts/models/game_engine.js'
-], (zt, EventEmitter2, DataStore) ->
+  'namespace'
+  'libs/eventemitter2'
+  'models/score_state'
+  'models/distribution'
+  'models/door'
+  'models/door_list'
+  'models/game_engine'
+], (zt, EventEmitter2) ->
   
   class zt.OpenDoorTheGame
 

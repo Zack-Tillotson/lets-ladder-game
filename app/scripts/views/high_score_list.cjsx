@@ -1,8 +1,4 @@
-define [
-  'assets/scripts/namespace.js'
-  'react.js'
-  'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js'
-], (zt, React, moment) ->
+define ['namespace', 'react', 'moment'], (zt, React, moment) ->
 
   HighScoreListView = React.createClass
 

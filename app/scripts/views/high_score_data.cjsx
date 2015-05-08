@@ -1,8 +1,4 @@
-define [
-  'assets/scripts/namespace.js'
-  'react.js'
-  'assets/scripts/views/high_score_list.js'
-], (zt, React, HighScoreList) ->
+define ['namespace', 'react', 'views/high_score_list'], (zt, React, HighScoreList) ->
 
   HighScoreDataView = React.createClass
 

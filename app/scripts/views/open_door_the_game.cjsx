@@ -1,13 +1,13 @@
 define [
-  'assets/scripts/namespace.js'
-  'react.js'
-  'assets/scripts/models/score_state.js'
-  'assets/scripts/views/score_state.js'
-  'assets/scripts/views/action_options.js'
-  'assets/scripts/views/door_list.js'
-  'assets/scripts/views/help.js'
-  'assets/scripts/views/door_spectrum.js'
-  'assets/scripts/views/high_score_data.js'
+  'namespace'
+  'react'
+  'models/score_state'
+  'views/score_state'
+  'views/action_options'
+  'views/door_list'
+  'views/help'
+  'views/door_spectrum'
+  'views/high_score_data'
 ], (zt, React, ScoreState, ScoreStateView, ActionOptionsView, DoorListView, HelpView, DoorSpectrumView, HighScoreDataView) ->
 
   OpenDoorTheGame = React.createClass

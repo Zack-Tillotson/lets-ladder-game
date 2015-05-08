@@ -1,8 +1,8 @@
 define [
-  'assets/scripts/namespace.js'
-  'assets/scripts/models/distribution.js'
-  'assets/scripts/models/door.js'
-  'assets/scripts/models/game_engine.js'
+  'namespace'
+  'models/distribution'
+  'models/door'
+  'models/game_engine'
 ], (zt) ->
   
   class zt.DoorList

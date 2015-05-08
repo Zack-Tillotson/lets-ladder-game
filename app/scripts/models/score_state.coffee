@@ -1,4 +1,4 @@
-define ['assets/scripts/namespace.js'], (zt) ->
+define ['namespace'], (zt) ->
   
   class zt.ScoreState
 

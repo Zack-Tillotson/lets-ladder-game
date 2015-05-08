@@ -1,9 +1,6 @@
-define [
-  'assets/scripts/namespace.js'
-], (zt) ->
+define ['namespace'], (zt) ->
   
   class zt.GameEngine
-
 
     constructor: (options) ->
       options = _.extend {}, GameEngine.defaults, options
