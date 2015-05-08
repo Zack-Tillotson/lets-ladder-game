@@ -8,7 +8,7 @@ define [
   'models/game_engine'
 ], (zt, EventEmitter2) ->
   
-  class zt.OpenDoorTheGame
+  class zt.GameState
 
   	constructor: (options) ->
 
@@ -59,7 +59,7 @@ define [
           @delayAction =>
             @doors.resetDoors()
         else
-          @emitter.emit 'game_over', @getState()
+          @delayAction => @emitter.emit('game_over', @getState())
 
       @emitter.emit 'state_change'
 

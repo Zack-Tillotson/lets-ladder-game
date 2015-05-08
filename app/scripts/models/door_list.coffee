@@ -37,7 +37,9 @@ define [
 
     getState: ->
       check_count: @getCheckCount()
+      is_max_checks: @getCheckCount() >= @max_check
       strike_count: @getStrikeCount()
+      is_max_strikes: @getStrikeCount() >= @max_strike
       unopened_count: @getUnopenedCount()
       exposed_rewards: @getRewardedTotal()
       doors: (@[i].getState() for i in [0...@length])

@@ -1,8 +1,8 @@
 define ['namespace', 'libs/eventemitter2', 'firebase'], (zt, EventEmitter2, Firebase2_4) ->
   
   class zt.HighScoreData
-    @max_scores = 10
-    @recent_time = 1000 * 60 * 60 * 1 # 1 hour!
+    @max_scores = 5
+    @recent_time = 1000 * 60 * 60 # 1 hour
 
     constructor: (options) ->
 

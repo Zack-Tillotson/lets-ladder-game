@@ -1,11 +1,38 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=0" />
+    <title>Open: A Game of Risk</title>
     <style>
       body {
         width: 1024px;
         margin-left: auto;
         margin-right: auto;
+        font-family: sans-serif;
+      }    
+      h1 {
+        margin-top: 25px;
+      }  
+      h1 .tagline {
+        color: #555;
+      }
+      .menu {
+        margin: 0;
+        position: fixed;
+        width: 100%;
+        left: 0;
+        top: 5px;
+        text-align: center;
+        list-style: none;
+        font-size: 12px;
+      }
+      .menu .menu-item {
+        display: inline-block;
+        margin: 0;
+        padding: 0 10px;
+      }
+      .menu .menu-item a:link, .menu .menu-item a:visited {
+        text-decoration: none;
+        color: #000;
       }
       @media screen and (max-width: 450px) {
         body {
@@ -30,7 +57,12 @@
   </head>
   <body>
 
-    <!--<h1>An Adorable Game</h1>-->
+    <header>
+      <h1>Open <span class='tagline'>A Game of Risk</span></h1>
+      <ul class="menu">
+        <li class="menu-item"><a href="http://ZacheryTillotson.com">The Author</a></li>
+      </ul>
+    </header>
     <div id="game-container"></div>
 
     <script data-main="assets/scripts/main.js" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.17/require.min.js"></script>
