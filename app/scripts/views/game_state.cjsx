@@ -29,6 +29,6 @@ define [
         <HighScoreDataView 
           high_scores={@props.high_scores} 
           is_game_over={@props.model_state.score.is_game_over}
-          is_open={@props.game_over_is_open} 
+          is_open={@props.high_score_is_open} 
           doAction={@props.event_handler} />
       </div>
