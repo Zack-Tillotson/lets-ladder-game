@@ -30,7 +30,7 @@ define [
 
     #### User Actions ##############
 
-    delayAction: (fn, waitTime = 1000) ->
+    delayAction: (fn, waitTime = 1500) ->
       @emitter.once 'ui_wait', fn
       @allow_events = false
       setTimeout( => 

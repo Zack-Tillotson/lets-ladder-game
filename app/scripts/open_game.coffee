@@ -35,7 +35,7 @@ define [
         when 'open_door' then @model.actionOpenDoor(value)
         when 'reset_doors' then @model.actionResetDoors()
         when 'toggle'
-          @state[key] = false for key, value in @state when key isnt value # Ensure all other views are closed
+          @state[key] = false for key, val in @state when key isnt value # Ensure all other views are closed
           @state[value] = !@state[value]
           @update_model_state()
 
