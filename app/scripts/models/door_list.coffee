@@ -37,8 +37,10 @@ define [
 
     getState: ->
       check_count: @getCheckCount()
+      max_check_count: @max_check
       is_max_checks: @getCheckCount() >= @max_check
       strike_count: @getStrikeCount()
+      max_strike_count: @max_strike
       is_max_strikes: @getStrikeCount() >= @max_strike
       unopened_count: @getUnopenedCount()
       exposed_rewards: @getRewardedTotal()

@@ -9,7 +9,8 @@ define [
   'views/door_spectrum'
   'views/high_score_data'
   'views/game_over'
-], (zt, React, ScoreState, ScoreStateView, ActionOptionsView, DoorListView, HelpView, DoorSpectrumView, HighScoreDataView, GameOverView) ->
+  'views/door_list_state'
+], (zt, React, ScoreState, ScoreStateView, ActionOptionsView, DoorListView, HelpView, DoorSpectrumView, HighScoreDataView, GameOverView, DoorListStateView) ->
 
   OpenDoor = React.createClass
 
@@ -17,6 +18,7 @@ define [
 
       <div className="open-door-the-game odtg">
         <ScoreStateView score={@props.model_state.score} />
+        <DoorListStateView doors={@props.model_state.door_list} />
         <ActionOptionsView doAction={@props.event_handler} action_options={@props.model_state.action_options} />
         <DoorListView doAction={@props.event_handler} door_list={@props.model_state.door_list} />
         <DoorSpectrumView />
@@ -29,6 +31,6 @@ define [
         <HighScoreDataView 
           high_scores={@props.high_scores} 
           is_game_over={@props.model_state.score.is_game_over}
-          is_open={@props.high_score_is_open} 
+          is_open={@props.high_scores_is_open} 
           doAction={@props.event_handler} />
       </div>
