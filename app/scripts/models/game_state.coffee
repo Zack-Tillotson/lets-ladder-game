@@ -15,12 +15,8 @@ define [
       @game_engine = new zt.GameEngine()
       @score_state = new zt.ScoreState(game_engine: @game_engine)
       @doors = new zt.DoorList(game_engine: @game_engine)
-      
-      @emitter = new EventEmitter2()
-      @allow_events = true # Used to prevent multiple events from being triggered at once
 
-    getState: ->
-      allow_events: @allow_events
+    getState: =>
       score: @score_state.getState()
       door_list: @doors.getState()
       action_options:
@@ -30,44 +26,36 @@ define [
 
     #### User Actions ##############
 
-    delayAction: (fn, waitTime = 1500) ->
-      @emitter.once 'ui_wait', fn
-      @allow_events = false
-      setTimeout( => 
-        @allow_events = true
-        @emitter.emit 'ui_wait'
-        @emitter.emit 'state_change'
-      , waitTime)
+    actionOpenDoor: (index = 0) ->
+      return if @score_state.isGameOver() or @doors[index].status isnt "unopened"
 
-    actionOpenDoor: (index) ->
-      return if not @allow_events or @score_state.isGameOver() or @doors[index].status isnt "unopened"
-
-      @doors[index].open()
+      result = {}
+      result.door = @doors[index].open()
       
       if @doors.isAtMaxChecks()
         
         @score_state.increaseMoney @doors.getRewardedTotal()
         @game_engine.level = @score_state.increaseLevel()
         
-        @delayAction =>
-          @doors.resetDoors()
+        @doors.resetDoors()
+        result.reset = true
+        result.level_up = true
 
       else if @doors.isAtMaxStrikes()
 
         @game_engine.level = @score_state.decreaseLevel()
         if @score_state.loseALife()
-          @delayAction =>
-            @doors.resetDoors()
+          @doors.resetDoors()
+          result.reset = true
+          result.level_down = true
         else
-          @delayAction => @emitter.emit('game_over', @getState())
+          result.game_over = true
 
-      @emitter.emit 'state_change'
+      result
 
     actionResetDoors: ->
-      return if not @allow_events or @score_state.isGameOver()
+      return if @score_state.isGameOver()
 
       if @game_engine.getResetDoorsCost() < @score_state.money
         @score_state.decreaseMoney @game_engine.getResetDoorsCost()
         @doors.resetDoors()
-
-      @emitter.emit 'state_change'

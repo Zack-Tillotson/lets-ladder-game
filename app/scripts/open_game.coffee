@@ -7,23 +7,23 @@ define [
     constructor: (options) ->
 
       @container = options?.container or document.body
+      
       @model = new zt.GameState()
       @high_score_data = new zt.HighScoreData()
-      @state =
+      @toggle_state =
         help_is_open: false
         high_scores_is_open: false
         game_over_is_open: false
+      @recent_state =
+        up: false
+        down: false
+      
+      @disable_actions = false
+      @current_actions = 0
 
-      window.x = @
+      @current_model_state = @model.getState()
 
       # Event triggers 
-      @model.emitter.on 'state_change', =>
-        @update_model_state()
-
-      @model.emitter.on 'game_over', (game_data) =>
-        @state['game_over_is_open'] = true
-        @high_score_data.saveGameInformation game_data
-
       @high_score_data.emitter.on 'state_change', =>
         @update_model_state()
 
@@ -31,20 +31,63 @@ define [
       @update_model_state()
 
     event_handler: (action, value) =>
+      return if @disable_actions
+
       switch action
-        when 'open_door' then @model.actionOpenDoor(value)
-        when 'reset_doors' then @model.actionResetDoors()
+        when 'open_door'
+
+          door_result_state = @model.actionOpenDoor(value)
+
+          if door_result_state
+
+            # After a pause update the rest of the state
+            @current_actions++
+            setTimeout =>
+              @current_actions--
+              if @current_actions is 0
+                
+                if door_result_state.level_down or door_result_state.level_up
+                  @recent_state.down = door_result_state.level_down ? false
+                  @recent_state.up = door_result_state.level_up ? false
+                  setTimeout =>
+                    @recent_state.down = false
+                    @recent_state.up = false
+                    @update_model_state()
+                  , 1500
+
+                @update_model_state @model.getState()
+
+            , 750
+
+            # For now, just update the state of that door
+            @current_model_state.door_list.doors[value] = door_result_state.door            
+            @update_model_state()
+
+        when 'reset_doors'
+          @model.actionResetDoors()
+          @recent_state.reset = true
+          setTimeout =>
+            @recent_state.reset = false
+            @update_model_state()
+          , 1500
+          @update_model_state @model.getState()
         when 'toggle'
-          @state[key] = false for key, val in @state when key isnt value # Ensure all other views are closed
-          @state[value] = !@state[value]
+          @toggle_state[key] = false for key, val in @toggle_state when key isnt value # Ensure all other views are closed
+          @toggle_state[value] = !@toggle_state[value]
           @update_model_state()
 
-    update_model_state: =>
+    update_model_state: (model_state = @current_model_state) =>
+
+      @current_model_state = model_state
+      @disable_actions = @current_model_state.score.level isnt @model.getState().score.level
+            
       React.render(React.createElement(GameStateView, {
-        model_state: @model.getState() 
+        disable_actions: @disable_actions
+        model_state: model_state 
         event_handler: @event_handler      
-        help_is_open: @state.help_is_open
+        help_is_open: @toggle_state.help_is_open
         high_scores: @high_score_data.getState()
-        high_scores_is_open: @state.high_scores_is_open
-        game_over_is_open: @state.game_over_is_open
+        high_scores_is_open: @toggle_state.high_scores_is_open
+        game_over_is_open: @toggle_state.game_over_is_open
+        recent_state: @recent_state
       }), @container)

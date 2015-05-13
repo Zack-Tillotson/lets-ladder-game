@@ -18,6 +18,7 @@ define ['namespace'], (zt) ->
 
       open: (is_check = @is_check) ->
         @status = if is_check then 'check' else 'strike'
+        @getState()
           
       @defaults:
         reward: 0        

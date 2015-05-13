@@ -17,7 +17,9 @@ define [
     render: ->
 
       <div className="open-door-the-game odtg">
-        <ScoreStateView score={@props.model_state.score} />
+        <ScoreStateView 
+          score={@props.model_state.score}
+          recent_state={@props.recent_state} />
         <DoorListStateView doors={@props.model_state.door_list} />
         <ActionOptionsView doAction={@props.event_handler} action_options={@props.model_state.action_options} />
         <DoorListView doAction={@props.event_handler} door_list={@props.model_state.door_list} />

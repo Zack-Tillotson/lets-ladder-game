@@ -132,9 +132,17 @@
       display: inline-block
       margin: 0 50px
       text-align: center
+      transition: color 2s
+
+      &.recent-up
+        transition: color 0s
+        color: green
+
+      &.recent-down
+        color: red
+        transition: color 0s
 
       .title
-        color: #555
         display: inline-block
 
       .value
@@ -145,6 +153,15 @@
       display: inline-block
       margin: 0 50px
       text-align: center
+      transition: color 2s
+
+      &.recent-up
+        color: green
+        transition: color 0s
+
+      &.recent-down
+        color: red
+        transition: color 0s
 
     .lives
       display: inline-block
@@ -189,7 +206,6 @@
 
     .door-result
       padding: 0 10px
-      transition: color 0s .5s
 
       &.empty
         color: #ccc
@@ -233,20 +249,20 @@
 
         &.opened
           .door-seal
-            -webkit-animation: door-opens-seal 1s forwards
-            -o-animation: door-opens-seal 1s forwards
-            -moz-animation: door-opens-seal 1s forwards
-            animation: door-opens-seal 1s forwards
+            -webkit-animation: door-opens-seal .75s forwards
+            -o-animation: door-opens-seal .75s forwards
+            -moz-animation: door-opens-seal .75s forwards
+            animation: door-opens-seal .75s forwards
           .door-left
-            -webkit-animation: door-opens-left 1s forwards
-            -o-animation: door-opens-left 1s forwards
-            -moz-animation: door-opens-left 1s forwards
-            animation: door-opens-left 1s forwards
+            -webkit-animation: door-opens-left .75s forwards
+            -o-animation: door-opens-left .75s forwards
+            -moz-animation: door-opens-left .75s forwards
+            animation: door-opens-left .75s forwards
           .door-right
-            -webkit-animation: door-opens-right 1s forwards
-            -o-animation: door-opens-right 1s forwards
-            -moz-animation: door-opens-right 1s forwards
-            animation: door-opens-right 1s forwards
+            -webkit-animation: door-opens-right .75s forwards
+            -o-animation: door-opens-right .75s forwards
+            -moz-animation: door-opens-right .75s forwards
+            animation: door-opens-right .75s forwards
 
         .door-seal
           display: inline-block
@@ -394,7 +410,7 @@
           display: inline-block
           
           &.small-list
-            height: 150px
+            height: 180px
 
           &.main-list
             padding-left: 50px
