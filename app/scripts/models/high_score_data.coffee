@@ -8,7 +8,7 @@ define ['namespace', 'libs/eventemitter2', 'firebase'], (zt, EventEmitter2, Fire
 
       @emitter = new EventEmitter2()
 
-      @fb = new Firebase("https://blistering-inferno-4564.firebaseio.com/v1_0/scores");
+      @fb = new Firebase("https://blistering-inferno-4564.firebaseio.com/v1_1/scores");
       if not @fb.getAuth()
         @fb.authAnonymously (error, authData) ->
           if (error)
