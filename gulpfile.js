@@ -9,6 +9,7 @@ var del = require('del');
 
 gulp.task('clean', function(cb) {
   del(['public/**/*']);
+  del(['prod-public/**/*']);
   cb();
 });
 
