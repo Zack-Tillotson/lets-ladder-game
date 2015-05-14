@@ -58,3 +58,5 @@ gulp.task('build-development', ['coffee', 'spec-coffee', 'cjsx', 'sass', 'js-lib
 gulp.task('build-production', ['coffee', 'spec-coffee', 'cjsx', 'sass', 'js-libs', 'html-files']);
 
 gulp.task('default', ['build-development']);
+
+// node r.js -o require.config --keepBuildDir=true

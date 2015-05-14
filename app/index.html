@@ -2,6 +2,10 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=0" />
     <title>Open: A Game of Risk</title>
+    <meta property="og:title" content="Open: A Game of Risk" />
+    <meta property="og:url" content="http://zacherytillotson.com/open/" />
+    <meta property="og:image" content="http://zacherytillotson.com/open/share.png" />
+    <meta property="og:description" content="Open is a money maximizing game - easy to learn and built with the latest technology."/>
     <style>
       body {
         width: 1024px;
@@ -35,6 +39,12 @@
         text-decoration: none;
         color: #000;
       }
+      .loading {
+        font-size: 30px;
+        color: #ccc;
+        margin-top: 30px;
+        text-align: center;
+      }
       @media (max-width: 1024px) {
         body {
           width: auto;
@@ -66,7 +76,7 @@
         <li class="menu-item"><a href="http://www.learningmachines101.com/">An Unaffiliated Podcast</a></li>
       </ul>
     </header>
-    <div id="game-container"></div>
+    <div id="game-container"><div class="loading">Loading, please wait.</div><noscript>Sorry this game requires javascript.</noscript></div>
 
     <script>window.startLoadTime = new Date().getTime();</script>
     <script data-main="assets/scripts/main.js" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.17/require.min.js"></script>
