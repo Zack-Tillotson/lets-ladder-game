@@ -8,12 +8,22 @@ define [
 
       @container = options?.container or document.body
       
-      @model = new zt.GameState()
+      # Event triggers 
       @high_score_data = new zt.HighScoreData()
+      @high_score_data.emitter.on 'state_change', =>
+        @update_model_state()
+
+      @initialize()
+
+      # And draw once to start us off
+      @update_model_state()
+
+    initialize: =>
+      @model = new zt.GameState()
+      
       @toggle_state =
         help_is_open: false
         high_scores_is_open: false
-        game_over_is_open: false
       @recent_state =
         up: false
         down: false
@@ -22,13 +32,6 @@ define [
       @current_actions = 0
 
       @current_model_state = @model.getState()
-
-      # Event triggers 
-      @high_score_data.emitter.on 'state_change', =>
-        @update_model_state()
-
-      # And draw once to start us off
-      @update_model_state()
 
     event_handler: (action, value) =>
       return if @disable_actions
@@ -63,6 +66,10 @@ define [
             @current_model_state.door_list.doors[value] = door_result_state.door            
             @update_model_state()
 
+            # Save the score if it's game over
+            if door_result_state.game_over
+              @high_score_data.saveGameInformation @model.getState()
+
         when 'reset_doors'
           @model.actionResetDoors()
           @recent_state.reset = true
@@ -74,6 +81,9 @@ define [
         when 'toggle'
           @toggle_state[key] = false for key, val in @toggle_state when key isnt value # Ensure all other views are closed
           @toggle_state[value] = !@toggle_state[value]
+          @update_model_state()
+        when 'new_game'
+          @initialize()
           @update_model_state()
 
     update_model_state: (model_state = @current_model_state) =>
@@ -88,6 +98,6 @@ define [
         help_is_open: @toggle_state.help_is_open
         high_scores: @high_score_data.getState()
         high_scores_is_open: @toggle_state.high_scores_is_open
-        game_over_is_open: @toggle_state.game_over_is_open
+        game_over_is_open: model_state.score.is_game_over
         recent_state: @recent_state
       }), @container)
