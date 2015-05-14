@@ -18,6 +18,9 @@ define [
       # And draw once to start us off
       @update_model_state()
 
+      # Call the load finish GA event
+      ga('send', 'event', 'open_game', 'loaded', 'load time', new Date().getTime() - window.startLoadTime) if typeof ga is "function"
+
     initialize: =>
       @model = new zt.GameState()
       
