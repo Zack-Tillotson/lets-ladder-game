@@ -413,17 +413,21 @@
             .list-item
               margin-top: 10px
 
-              .score, .date, .level
+              .name
+                width: 75px
                 display: inline-block
 
               .score
-                width: 100px
+                width: 75px
+                display: inline-block
 
               .level
-                width: 100px
+                width: 75px
+                display: inline-block
 
               .date
                 margin-left: 15px
+                display: inline-block
 
   .game-over-overlay
     cursor: pointer
@@ -432,20 +436,89 @@
     right: 0
     top: 0
     bottom: 0
+    background: rgba(0,0,0,.95)
+    display: none
+    z-index: 15
+
+    &.active
+      display: block
 
     .game-over-view      
-      background: rgba(0,0,0,.95)
-      z-index: 10
-      color: #e9e9e9
-      font-size: 15px
-      margin: 0
+      color: #e9e9e9      
+      font-size: 20px
+      width: 1024px
+      margin: 100px auto 0 auto
 
-      &.inactive
-        display: none
+      .title
+        font-size: 75px
+        text-align: center
+        font-weight: bold
+        color: white
+        background: -webkit-linear-gradient(rgb(255, 80, 80), #ff0000);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 25px
 
-      &.active
-        display: block
+      .name-label
+        display: inline-block
+        font-size: 30px
 
+      .game-name
+        display: inline-block
+        margin-left: 15px
+        font-size: 30px
+
+      .game-score
+        display: inline-block
+        margin-left: 100px
+        color: #E4FF93
+        font-size: 30px
+
+      .game-level
+        display: inline-block
+        margin-left: 100px
+        color: #E4FF93
+        font-size: 30px
+
+      .high-scores-list
+        width: 100%
+        margin-top: 50px
+        
+        .list-title
+          font-size: 20px
+          border-bottom: solid 1px white
+
+        .list-data
+          .list-item
+            margin-top: 10px
+
+            .name
+              width: 75px
+              display: inline-block
+
+            .score
+              width: 75px
+              display: inline-block
+
+            .level
+              width: 75px
+              display: inline-block
+
+              .level-title
+                margin-right: 5px
+
+            .date
+              margin-left: 15px
+              display: inline-block
+
+      .new-game-button
+        font-size: 75px
+        text-align: center
+        font-weight: bold
+        color: white
+        background: -webkit-linear-gradient(#9bff87, #fff)
+        -webkit-background-clip: text
+        -webkit-text-fill-color: transparent
 
 // @media (max-width: 450px)
 @media (max-width: 1024px)
@@ -525,4 +598,40 @@
       .high-scores-toggle
         top: 5px
         left: 5px
-        
+
+    .game-over-overlay
+      .game-over-view
+        font-size: 15px
+        width: 100%
+        margin: 20px auto 0 auto
+
+        .title
+          font-size: 35px
+          margin-bottom: 15px
+
+        .name-label
+          font-size: 20px
+
+        .name
+          font-size: 20px
+
+        .game-score
+          font-size: 20px
+
+        .game-level
+          font-size: 20px
+
+        .high-scores-list
+          margin-top: 20px
+
+          .list-data 
+            margin: 3px 0
+
+            .list-item
+              margin: 0
+
+              .score, .level, .name
+                width: 50px
+
+        .new-game-button
+          font-size: 35px

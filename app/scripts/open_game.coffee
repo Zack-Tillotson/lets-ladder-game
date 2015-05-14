@@ -32,6 +32,7 @@ define [
       @current_actions = 0
 
       @current_model_state = @model.getState()
+      @high_score = null
 
     event_handler: (action, value) =>
       return if @disable_actions
@@ -82,6 +83,8 @@ define [
           @toggle_state[key] = false for key, val in @toggle_state when key isnt value # Ensure all other views are closed
           @toggle_state[value] = !@toggle_state[value]
           @update_model_state()
+        when 'update_high_score_name'
+          @high_score_data.updateHighScoreInformation name: value
         when 'new_game'
           @initialize()
           @update_model_state()

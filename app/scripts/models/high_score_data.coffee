@@ -8,7 +8,7 @@ define ['namespace', 'libs/eventemitter2', 'firebase'], (zt, EventEmitter2, Fire
 
       @emitter = new EventEmitter2()
 
-      @fb = new Firebase("https://blistering-inferno-4564.firebaseio.com/v1_1/scores");
+      @fb = new Firebase("https://blistering-inferno-4564.firebaseio.com/v1_2/scores");
       if not @fb.getAuth()
         @fb.authAnonymously (error, authData) ->
           if (error)
@@ -37,8 +37,16 @@ define ['namespace', 'libs/eventemitter2', 'firebase'], (zt, EventEmitter2, Fire
       recent_scores: @recent_scores
 
     saveGameInformation: (data) =>
-      @fb.push().set
+      @latest_high_score = @fb.push()
+      @latest_high_score_data = 
         who: @fb.getAuth().auth.uid
+        name: ""
         date: new Date().getTime()
         score: data.score.money
         level: data.score.level
+      @latest_high_score.set @latest_high_score_data
+
+    updateHighScoreInformation: (data) =>
+      return if not @latest_high_score
+      @latest_high_score_data = $.extend @latest_high_score_data, data
+      @latest_high_score.set @latest_high_score_data

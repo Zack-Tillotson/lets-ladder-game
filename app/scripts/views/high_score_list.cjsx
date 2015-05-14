@@ -6,9 +6,10 @@ define ['namespace', 'react', 'moment'], (zt, React, moment) ->
 
       high_score_elements = ((
         <li className="list-item">
+          <span className="name">{item.name}</span>
           <span className="score">${item.score}</span>
           <span className="level">Level {item.level}</span>
-          <span className="date">{moment(item.date).format("MMMM Do YYYY, h:mm a")}</span>
+          <span className="date">{moment(item.date).format("MM-DD-YY h:mm a")}</span>
         </li>
       ) for item in @props.high_scores or {})
         
