@@ -21,6 +21,8 @@ define ['namespace', 'react', 'views/high_score_list'], (zt, React, HighScoreLis
             <span className="value">{@props.score.level}</span>
           </div>
           <HighScoreList high_scores={@props.high_scores.local_scores} title="My High Scores" class_name="main-list" />
-          <div class="new-game-button" onClick={@onNewGameClick}>New Game</div>
+          <div className="new-game-button" onClick={@onNewGameClick}>
+            <span className="icon fa fa-repeat" />New Game
+          </div>
         </div>
       </div>
