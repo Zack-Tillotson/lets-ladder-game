@@ -1,6 +1,6 @@
 define [
-  'namespace', 'react', 'models/game_state', 'views/game_state', 'models/high_score_data'
-], (zt, React, GameState, GameStateView, HighScoreData) ->
+  'namespace', 'react', 'models/game_state', 'views/game_state', 'models/high_score_data', 'jquerycookie'
+], (zt, React, GameState, GameStateView, HighScoreData, jQueryCookie) ->
 
   class zt.OpenGame
 
@@ -22,10 +22,13 @@ define [
       ga('send', 'event', 'open_game', 'loaded', 'load time', new Date().getTime() - window.startLoadTime) if typeof ga is "function"
 
     initialize: =>
-      @model = new zt.GameState()
+      @model = new zt.GameState() 
+
+      help_is_open = !($.cookie 'visited')
+      $.cookie 'visited', true, expires: 365, path: '/'
       
       @toggle_state =
-        help_is_open: false
+        help_is_open: help_is_open
         high_scores_is_open: false
       @recent_state =
         up: false
