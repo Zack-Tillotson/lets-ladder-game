@@ -37,10 +37,12 @@ define ['namespace', 'libs/eventemitter2', 'firebase'], (zt, EventEmitter2, Fire
       recent_scores: @recent_scores
 
     saveGameInformation: (data) =>
+      name = $.cookie('high_score_name') or ''
+
       @latest_high_score = @fb.push()
       @latest_high_score_data = 
         who: @fb.getAuth().auth.uid
-        name: ""
+        name: name
         date: new Date().getTime()
         score: data.score.money
         level: data.score.level
@@ -48,5 +50,8 @@ define ['namespace', 'libs/eventemitter2', 'firebase'], (zt, EventEmitter2, Fire
 
     updateHighScoreInformation: (data) =>
       return if not @latest_high_score
+
       @latest_high_score_data = $.extend @latest_high_score_data, data
+      $.cookie 'high_score_name', @latest_high_score_data.name, expires: 365, path: '/' if @latest_high_score_data.name?
       @latest_high_score.set @latest_high_score_data
+

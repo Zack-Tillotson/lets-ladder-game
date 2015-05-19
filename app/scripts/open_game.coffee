@@ -15,30 +15,35 @@ define [
 
       @initialize()
 
-      # And draw once to start us off
-      @update_model_state()
-
       # Call the load finish GA event
       ga('send', 'event', 'open_game', 'loaded', 'load time', new Date().getTime() - window.startLoadTime) if typeof ga is "function"
 
     initialize: =>
+
       @model = new zt.GameState() 
 
       help_is_open = !($.cookie 'visited')
       $.cookie 'visited', true, expires: 365, path: '/'
       
+      # Used to show elements of the UI which can be hidden
       @toggle_state =
         help_is_open: help_is_open
         high_scores_is_open: false
+
+      # Used for color highlighting pieces of the UI
       @recent_state =
         up: false
         down: false
       
+      # Keep track of UI element
       @disable_actions = false
       @current_actions = 0
 
       @current_model_state = @model.getState()
       @high_score = null
+
+      # And draw once to start us off
+      @update_model_state()
 
     event_handler: (action, value) =>
       return if @disable_actions
