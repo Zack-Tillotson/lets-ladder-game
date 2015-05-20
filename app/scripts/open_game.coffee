@@ -40,7 +40,6 @@ define [
       @current_actions = 0
 
       @current_model_state = @model.getState()
-      @high_score = null
 
       # And draw once to start us off
       @update_model_state()
@@ -83,13 +82,17 @@ define [
               @high_score_data.saveGameInformation @model.getState()
 
         when 'reset_doors'
+          
           @model.actionResetDoors()
+          
           @recent_state.reset = true
+          @update_model_state @model.getState()
+          
           setTimeout =>
             @recent_state.reset = false
             @update_model_state()
           , 1500
-          @update_model_state @model.getState()
+          
         when 'toggle'
           @toggle_state[key] = false for key, val in @toggle_state when key isnt value # Ensure all other views are closed
           @toggle_state[value] = !@toggle_state[value]
@@ -98,7 +101,6 @@ define [
           @high_score_data.updateHighScoreInformation name: value
         when 'new_game'
           @initialize()
-          @update_model_state()
 
     update_model_state: (model_state = @current_model_state) =>
 
