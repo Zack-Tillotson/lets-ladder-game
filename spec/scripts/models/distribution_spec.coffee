@@ -1,4 +1,4 @@
-define ['/assets/scripts/namespace.js', '/assets/scripts/models/distribution.js'], (zt, Distribution) ->
+  define ['namespace', 'models/distribution'], (zt, Distribution) ->
   describe "zt.Distribution", ->
 
     describe "in a standard initial state", ->

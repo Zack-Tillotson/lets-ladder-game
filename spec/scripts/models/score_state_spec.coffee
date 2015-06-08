@@ -1,75 +1,75 @@
-define ['/assets/scripts/namespace.js', '/assets/scripts/models/score_state.js'], (zt, ScoreState) ->
+define ['namespace', 'views/score_state'], (zt, ScoreState) ->
   describe "zt.ScoreState", ->
 
-    describe "in a standard initial state", ->
+    describe "adding and removing money", ->
 
-      beforeEach ->
-        @state = new zt.ScoreState()
-
-      it "has correct starting level", ->
-        expect(@state.level).toBe(1)
-
-      it "has correct starting money", ->
-        expect(@state.money).toBe(0)
-
-      it "has correct starting strikes", ->
-        expect(@state.strikes).toBe(0)
-
-      it "has correct starting max strikes", ->
-        expect(@state.max_strikes).toBe(3)
-
-      it "can be given more money", ->
-        @state.increaseMoney(42)
-        expect(@state.money).toBe(42)
-        @state.increaseMoney(15)
-        expect(@state.money).toBe(57)
-
-      it "can be given a strike", ->
-        @state.addStrike()
-        expect(@state.strikes).toBe(1)
-        @state.addStrike()
-        expect(@state.strikes).toBe(2)
-
-    describe "when passed a non default initial state", ->
       beforeEach ->
         @state = new zt.ScoreState
-          level: 7
-          money: 42
-          strikes: 3
-          max_strikes: 4
+          money: 100
+          level: 3
+          starting_lives: 3
+          lives: 3
 
-      it "has correct level", ->
-        expect(@state.level).toBe(7)
+      it "should correctly add a positive amount of money", ->
+        
+        before_amt = @state.getState().money
+        delta = 5
 
-      it "has correct money", ->
-        expect(@state.money).toBe(42)
+        @state.increaseMoney(delta)
 
-      it "has correct strikes", ->
-        expect(@state.strikes).toBe(3)
+        expect(@state.getState().money).toBe(before_amt + delta)
 
-      it "has correct max strikes", ->
-        expect(@state.max_strikes).toBe(4)
+      it "should correctly add a negative amount of money", ->
+        
+        before_amt = @state.getState().money
+        delta = -5
 
-    describe "when changing levels", ->
+        @state.increaseMoney(delta)
+
+        expect(@state.getState().money).toBe(before_amt + delta)
+
+      it "should correctly not go below zero money when increasing", ->
+        
+        before_amt = @state.getState().money
+        delta = -10000
+
+        @state.increaseMoney(delta)
+
+        expect(@state.getState().money).toBe(0)
+
+    describe "incraseing and decreasing the level", ->
+
       beforeEach ->
         @state = new zt.ScoreState
-          level: 12
-          money: 42
-          strikes: 2
-          max_strikes: 3
+          money: 100
+          level: 3
+          starting_lives: 3
+          lives: 3
 
-      it "can be promoted to the next level", ->
-        expect(@state.level).toBe(12)
-        expect(@state.strikes).toBe(2)
+      it "should correctly increase the level", ->
+        
+        before_level = @state.getState().level
+
         @state.increaseLevel()
-        expect(@state.level).toBe(13)
-        expect(@state.strikes).toBe(0)
 
-      it "falls down a level when given their last strike", ->
-        expect(@state.money).toBe(42)
-        expect(@state.level).toBe(12)
-        expect(@state.strikes).toBe(2)
-        @state.addStrike()
-        expect(@state.money).toBe(0)
-        expect(@state.level).toBe(11)
-        expect(@state.strikes).toBe(0)
+        expect(@state.getState().level).toBe(before_level + 1)
+
+      it "should correctly go down a level", ->
+        
+        before_level = @state.getState().level
+        
+        @state.decreaseLevel()
+
+        expect(@state.getState().level).toBe(before_level - 1)
+
+      it "should correctly stay at minimum of level 1", ->
+        
+        @state.decreaseLevel()
+        @state.decreaseLevel()
+        @state.decreaseLevel()
+        @state.decreaseLevel()
+        @state.decreaseLevel()
+
+        expect(@state.getState().level).toBe(1)
+
+      

@@ -8,6 +8,7 @@ define [
   class zt.DoorList
 
     constructor: (options) ->
+
       options = _.extend {}, DoorList.defaults, options
 
       @game_engine = options.game_engine
@@ -15,11 +16,10 @@ define [
       @max_check = options.max_check
       @max_strike = options.max_strike
 
-      if options.length > 0
-        @length = options.length
-        @[i] = options[i] for i in [0...@length]
-      else
-        @resetDoors()
+      @resetDoors()
+
+      if options.doors?.length? > 0
+        @[i] = options.doors[i] for i in [0...options.doors.length]
 
     push: (item) ->
       @[@length++] = item

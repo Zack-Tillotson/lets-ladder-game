@@ -26,6 +26,8 @@ define ['namespace'], (zt) ->
 
     increaseMoney: (amt) ->
       @money += amt
+      @money = 0 if @money < 0
+      @money
 
     decreaseMoney: (amt) ->
       @increaseMoney -1 * amt

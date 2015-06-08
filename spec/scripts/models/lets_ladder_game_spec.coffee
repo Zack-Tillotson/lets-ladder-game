@@ -5,7 +5,7 @@ define [
   '/assets/scripts/models/lets_ladder_game.js'
 ], (zt, Door, ScoreState, LetsLadderGame) ->
 
-  describe "zt.LetsLadderGame", ->
+  describe "zt.OpenGame", ->
 
     describe "in a standard initial state", ->
 
