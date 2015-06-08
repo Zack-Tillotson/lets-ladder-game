@@ -1,11 +1,14 @@
 require('coffee-script/register');
 
+var config = require('./env_config');
+
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var coffee = require('gulp-coffee');
 var cjsx = require('gulp-cjsx');
 var sass = require('gulp-sass');
 var del = require('del');
+var preprocess = require('gulp-preprocess');
 
 gulp.task('clean', function(cb) {
   del(['public/**/*']);
@@ -15,6 +18,7 @@ gulp.task('clean', function(cb) {
 
 gulp.task('coffee', function() {
   gulp.src('app/scripts/**/*.coffee')
+    .pipe(preprocess({context: {FIREBASE_APP: config.env.firebase_app}}))
     .pipe(coffee({bare: true}).on('error', gutil.log))
     .pipe(gulp.dest('./public/assets/scripts'));
 });
