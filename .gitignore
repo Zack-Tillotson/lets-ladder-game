@@ -24,6 +24,9 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
+# Configuration stuff
+env_config.js
+
 # Public directory stuff
 public/*
 app/scripts/*.js
