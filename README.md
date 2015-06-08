@@ -1,27 +1,22 @@
-# Open Door, The Game
+# Open Door: A Game of Risk
 Zack Tillotson
 
 ## Description
 
-A money maximizing game where you are presented with a number of doors which can be opened. Behind each door is either a monitary reward or a Strike. If you reach your Strike limit then:
+A money maximizing game where you are presented with a number of doors which can be opened. Behind each door is either a Check and a monitary value or Strike. Three checks and you collect the total money shown and increase your level. Three strikes and you lose a life and decrease your level. Higher levels increase the average door value and likelyhood of a Strike. Open doors until you go up or down a level, or pay to reset the board (close the doors and re-randomize them). To get a high score you will need to optimize your actions for the risk presented.
 
-1. You lose a life 
-2. The doors reset 
-3. The strikes reset 
-4. You go down a level. 
+## Installation
 
-If you successfully open enough doors however 
+```
+npm install
+gulp
+node server.js
+```
+Then use a modern browser to navigate to http://localhost:3000/
 
-1. You reset the strike count 
-2. Gain all of the monitary rewards 
-3. The doors all reset
-4. You go up a level which makes the average door reward higher. 
+## Mechanics Detail
 
-One last option is to pay a cost to force the board to reset.
-
-Written in Javascript in order to be embedded on a website. Technologies include ReactJS, UnderscoreJS, Gulp, NodeJS, and Jasmine.
-
-## Mechanics
+In designing this game I was interested in somethign which could achieve three goals. First I wanted to write a purely client side application. Second I wanted to write something which could serve as a vehicle to learn and teach machine learning techniques. Third I wanted it to be both simple to learn but complex enough to be interesting. I was originally inspired by the Multi Armed Bandit and Montey Hall problems, but the design evolved into something a bit different over time. This is a brief description of some of the design decisions.
 
 ### Open a door
 
@@ -38,3 +33,8 @@ When the user is able to achieve the required open door count they win the level
 ### Losing a life
 
 If a player gets too many Strikes you fall down a level and lose a life. After three lives are lost the game is over.
+
+
+### Etc
+
+Written in pure Javascript in order to be embedded on a website. Technologies include ReactJS (!), jQuery with some plugins, UnderscoreJS, Gulp, NodeJS, FirebaseJS, and Jasmine.
