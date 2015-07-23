@@ -10,5 +10,10 @@ requirejs.config
       moment: 'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min'
       jquerycookie: 'https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min'
 
-requirejs ['open_game'], (OpenGame) ->
-  new zt.OpenGame container: document.getElementById('game-container')
+requirejs ['open_game', 'jquerycookie'], (OpenGame, jQueryCookie) ->
+
+  new zt.OpenGame 
+    container: document.getElementById('game-container')
+    help_is_open = !($.cookie 'visited')
+
+  $.cookie 'visited', true, expires: 365, path: '/'

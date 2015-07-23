@@ -1,3 +1,3 @@
 exports.env = {
-  firebase_app: "[YOUR_FIREBASE_APP]"
+  firebase_app: "blistering-inferno-4564"
 };

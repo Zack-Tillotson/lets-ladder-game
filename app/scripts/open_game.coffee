@@ -1,12 +1,13 @@
 define [
-  'namespace', 'react', 'models/game_state', 'views/game_state', 'models/high_score_data', 'jquerycookie'
-], (zt, React, GameState, GameStateView, HighScoreData, jQueryCookie) ->
+  'namespace', 'react', 'models/game_state', 'views/game_state', 'models/high_score_data'
+], (zt, React, GameState, GameStateView, HighScoreData) ->
 
   class zt.OpenGame
 
     constructor: (options) ->
 
       @container = options?.container or document.body
+      @help_is_open = options?.help_is_open or false
       
       # Event triggers 
       @high_score_data = new zt.HighScoreData()
@@ -22,12 +23,9 @@ define [
 
       @model = new zt.GameState() 
 
-      help_is_open = !($.cookie 'visited')
-      $.cookie 'visited', true, expires: 365, path: '/'
-      
       # Used to show elements of the UI which can be hidden
       @toggle_state =
-        help_is_open: help_is_open
+        help_is_open: @help_is_open
         high_scores_is_open: false
 
       # Used for color highlighting pieces of the UI
