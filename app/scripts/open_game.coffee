@@ -8,6 +8,8 @@ define [
 
       @container = options?.container or document.body
       @help_is_open = options?.help_is_open or false
+      @auto_play_is_open = options?.auto_play_is_open or false
+      @auto_play_timer = null
       
       # Event triggers 
       @high_score_data = new zt.HighScoreData()
@@ -27,6 +29,7 @@ define [
       @toggle_state =
         help_is_open: @help_is_open
         high_scores_is_open: false
+        auto_play_is_open: @auto_play_is_open
 
       # Used for color highlighting pieces of the UI
       @recent_state =
@@ -37,6 +40,11 @@ define [
       @disable_actions = false
       @current_actions = 0
 
+      # Should the computer control, keep between game
+      @auto_play_state = @auto_play_state or
+        active: false
+
+      # The game's state
       @current_model_state = @model.getState()
 
       # And draw once to start us off
@@ -92,13 +100,31 @@ define [
           , 1500
           
         when 'toggle'
+
           @toggle_state[key] = false for key, val in @toggle_state when key isnt value # Ensure all other views are closed
           @toggle_state[value] = !@toggle_state[value]
           @update_model_state()
+
         when 'update_high_score_name'
+
           @high_score_data.updateHighScoreInformation name: value
+
         when 'new_game'
+
           @initialize()
+
+        when 'auto-player'
+
+          switch value
+            when 'play' 
+              @auto_play_state.active = true
+              @auto_play_timer = setInterval(@triggerAutoPlay, 2000) if not @auto_play_timer?
+            when 'pause'
+              @auto_play_state.active = false
+              clearInterval @auto_play_timer if @auto_play_timer?
+              @auto_play_timer = null
+          
+          @update_model_state()
 
     update_model_state: (model_state = @current_model_state) =>
 
@@ -114,4 +140,10 @@ define [
         high_scores_is_open: @toggle_state.high_scores_is_open
         game_over_is_open: model_state.score.is_game_over
         recent_state: @recent_state
+        auto_play_state: @auto_play_state
+        auto_play_is_open: @toggle_state.auto_play_is_open
       }), @container)
+
+    triggerAutoPlay: =>
+      if @auto_play_state.active
+        @event_handler 'open_door', @current_model_state.suggestion

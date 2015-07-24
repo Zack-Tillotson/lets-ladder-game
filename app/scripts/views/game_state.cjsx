@@ -10,7 +10,8 @@ define [
   'views/high_score_data'
   'views/game_over'
   'views/door_list_state'
-], (zt, React, ScoreState, ScoreStateView, ActionOptionsView, DoorListView, HelpView, DoorSpectrumView, HighScoreDataView, GameOverView, DoorListStateView) ->
+  'views/auto_player_controls'
+], (zt, React, ScoreState, ScoreStateView, ActionOptionsView, DoorListView, HelpView, DoorSpectrumView, HighScoreDataView, GameOverView, DoorListStateView, AutoPlayerControlsView) ->
 
   OpenDoor = React.createClass
 
@@ -22,7 +23,11 @@ define [
           recent_state={@props.recent_state} />
         <DoorListStateView doors={@props.model_state.door_list} />
         <ActionOptionsView doAction={@props.event_handler} action_options={@props.model_state.action_options} />
-        <DoorListView doAction={@props.event_handler} door_list={@props.model_state.door_list} />
+        <DoorListView 
+          doAction={@props.event_handler} 
+          door_list={@props.model_state.door_list} 
+          suggestion={@props.model_state.suggestion}
+          auto_play_state={@props.auto_play_state} />
         <DoorSpectrumView />
         <HelpView is_open={@props.help_is_open} doAction={@props.event_handler} />
         <GameOverView
@@ -34,5 +39,9 @@ define [
           high_scores={@props.high_scores} 
           is_game_over={@props.model_state.score.is_game_over}
           is_open={@props.high_scores_is_open} 
+          doAction={@props.event_handler} />
+        <AutoPlayerControlsView 
+          auto_play_state={@props.auto_play_state}
+          is_open={@props.auto_play_is_open}
           doAction={@props.event_handler} />
       </div>

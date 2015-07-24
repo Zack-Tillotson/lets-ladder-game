@@ -241,6 +241,13 @@
       &.strike
         background: #FF8080
 
+      &.suggested
+        .door-mover
+          .door-left
+            background: linear-gradient(270deg, rgb(109, 177, 255), rgb(19, 84, 255))
+          .door-right
+            background: linear-gradient(90deg, rgb(109, 177, 255), rgb(19, 84, 255))
+
       .door-mover
         z-index: 2
         position: relative
@@ -527,7 +534,58 @@
 
           .icon
             -webkit-text-fill-color: initial
-            
+
+  .auto-player-controls
+
+    position: fixed
+    bottom: 0px
+    left: 0px
+    right: 0px
+    background: #ddd
+    border-top: solid 2px #000
+    box-shadow: 0 0 10px 10px #444
+    display: block
+    height: 20px
+    transition: height .75sec
+    z-index: 3
+
+    &.open
+      height: 50px
+
+    .toggler
+      text-align: center
+      margin-bottom: 5px
+      background: #aaa
+      border-bottom: solid 1px #666
+
+      .title
+        position: absolute
+        left: 15px
+
+        .status
+          display: inline-block
+          color: #333
+
+      .toggle-icon
+        display: none
+        font-weight: bold
+
+        &.active
+          display: inline-block
+
+    .more-container
+      margin-left: 50px
+
+      .control
+        color: #666
+        cursor: default
+        display: inline-block
+        width: 50px
+        font-size: 25px
+
+        &.active
+          color: black
+          cursor: pointer
 
 // @media (max-width: 450px)
 @media (max-width: 1024px)

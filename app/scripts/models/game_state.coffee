@@ -19,10 +19,11 @@ define [
     getState: =>
       score: @score_state.getState()
       door_list: @doors.getState()
+      suggestion: @getBestDoorPrediction()
       action_options:
         reset_doors: 
           cost: reset_door_cost = @game_engine.getResetDoorsCost()
-          active:  reset_door_cost < @score_state.money and not @score_state.isGameOver()
+          active: reset_door_cost < @score_state.money and not @score_state.isGameOver()
 
     #### User Actions ##############
 
@@ -59,3 +60,18 @@ define [
       if @game_engine.getResetDoorsCost() < @score_state.money
         @score_state.decreaseMoney @game_engine.getResetDoorsCost()
         @doors.resetDoors()
+
+    #### Auto Actions #############
+
+    getBestDoorPrediction: ->
+      ret = -1
+
+      # Get the least risky door
+      for index in [0...@doors.length]
+
+        door = @doors[index]
+        continue if door.status isnt "unopened"
+        
+        ret = index if ret < 0 or door.strike_odds < @doors[ret].strike_odds
+
+      ret
