@@ -545,18 +545,22 @@
     border-top: solid 2px #000
     box-shadow: 0 0 10px 10px #444
     display: block
-    height: 20px
-    transition: height .75sec
+    height: 30px
+    -webkit-transition: height .25s
+    transition: height .25sec
     z-index: 3
+    font-size: 20px
 
     &.open
-      height: 50px
+      height: 65px
 
     .toggler
       text-align: center
       margin-bottom: 5px
       background: #aaa
       border-bottom: solid 1px #666
+      line-height: 30px
+      height: 30px
 
       .title
         position: absolute
@@ -565,10 +569,15 @@
         .status
           display: inline-block
           color: #333
+          margin-left: 5px
+
+          &.active
+            color: #2264FF
 
       .toggle-icon
         display: none
         font-weight: bold
+        line-height: 30px
 
         &.active
           display: inline-block
@@ -586,6 +595,27 @@
         &.active
           color: black
           cursor: pointer
+
+        &.faster-control, &.slower-control
+          margin-left: 10px
+          width: auto
+
+      .time-left
+        display: inline-block
+        width: 200px
+        height: 20px
+        position: relative
+        border-radius: 5px
+        border: solid 1px black
+
+        .time-bar
+          position: absolute
+          background: #2162FF
+          left: 0
+          top: 0
+          bottom: 0
+          transition: width .05s
+
 
 // @media (max-width: 450px)
 @media (max-width: 1024px)
@@ -702,3 +732,9 @@
 
         .new-game-button
           font-size: 30px
+
+    .auto-player-controls
+
+      .toggler .toggle-icon
+        float: right
+        margin-right: 15px

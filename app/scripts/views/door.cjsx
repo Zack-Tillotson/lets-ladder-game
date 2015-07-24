@@ -14,7 +14,7 @@ define ['react'], (React) ->
       result_text = if @props.status is "check" then "$#{@props.reward}" else "\u00a0"
       risk_class = "risk-#{Math.ceil(@props.strike_odds / 10)}"
 
-      <div className="door option-target #{@props.status} #{@props.suggested_class}" 
+      <div className="door option-target #{@props.status} #{@props.suggested_class} #{@props.strike_odds}_percent_to_fail" 
            onClick={@props.doAction} 
            data-action="open_door" 
            data-index={@props.index}>

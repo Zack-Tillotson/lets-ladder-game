@@ -43,5 +43,6 @@ define [
         <AutoPlayerControlsView 
           auto_play_state={@props.auto_play_state}
           is_open={@props.auto_play_is_open}
+          time_to_action={@props.auto_play_time_to_action}
           doAction={@props.event_handler} />
       </div>

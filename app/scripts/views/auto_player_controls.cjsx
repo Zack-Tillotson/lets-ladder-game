@@ -27,8 +27,8 @@ define [
       <div className="auto-player-controls #{toggle_class}">
         <div className="toggler" onClick={@clickToggleHandler}>
           <div className="title">
-            Computer Control
-            <div className="status">: {status_msg}</div>
+            Computer Control:
+            <div className="status #{pause_btn_class}">{status_msg}</div>
           </div>
           <i className="toggle-icon fa fa-angle-double-up #{toggle_up_class}"></i>
           <i className="toggle-icon fa fa-angle-double-down #{toggle_down_class}"></i>
@@ -39,6 +39,15 @@ define [
           </div>
           <div className="control pause-control #{pause_btn_class}" onClick={@clickHandler.bind(this, 'pause')}>
             <i className="fa fa-pause"></i>
+          </div>
+          <div className="time-left">
+            <span className="time-bar" style={{width: @props.time_to_action + "%"}}></span>
+          </div>
+          <div className="control faster-control active" onClick={@clickHandler.bind(this, 'faster')}>
+            <i className="fa fa-plus"></i>
+          </div>
+          <div className="control slower-control active" onClick={@clickHandler.bind(this, 'slower')}>
+            <i className="fa fa-minus"></i>
           </div>
         </div>
       </div>

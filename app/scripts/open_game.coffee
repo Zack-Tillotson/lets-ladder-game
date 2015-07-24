@@ -10,7 +10,8 @@ define [
       @help_is_open = options?.help_is_open or false
       @auto_play_is_open = options?.auto_play_is_open or false
       @auto_play_timer = null
-      
+      @auto_play_turn_time = 3000
+
       # Event triggers 
       @high_score_data = new zt.HighScoreData()
       @high_score_data.emitter.on 'state_change', =>
@@ -118,11 +119,16 @@ define [
           switch value
             when 'play' 
               @auto_play_state.active = true
-              @auto_play_timer = setInterval(@triggerAutoPlay, 2000) if not @auto_play_timer?
+              @auto_play_state.last_action_time = new Date().getTime()
+              @auto_play_timer = setInterval(@triggerAutoPlay, 50) if not @auto_play_timer?
             when 'pause'
               @auto_play_state.active = false
               clearInterval @auto_play_timer if @auto_play_timer?
               @auto_play_timer = null
+            when 'faster'
+              @auto_play_turn_time *= .75
+            when 'slower'
+              @auto_play_turn_time /= .75
           
           @update_model_state()
 
@@ -142,8 +148,14 @@ define [
         recent_state: @recent_state
         auto_play_state: @auto_play_state
         auto_play_is_open: @toggle_state.auto_play_is_open
+        auto_play_time_to_action: @getAutoPlayTimeLeft()
       }), @container)
 
     triggerAutoPlay: =>
-      if @auto_play_state.active
+      if @auto_play_state.active && @getAutoPlayTimeLeft() <= 0
+        @auto_play_state.last_action_time = new Date().getTime()
         @event_handler 'open_door', @current_model_state.suggestion
+      @update_model_state()
+
+    getAutoPlayTimeLeft: ->
+      parseInt((@auto_play_turn_time - (new Date().getTime() - @auto_play_state.last_action_time))/@auto_play_turn_time*100)
