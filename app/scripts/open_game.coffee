@@ -74,11 +74,11 @@ define [
                     @recent_state.down = false
                     @recent_state.up = false
                     @update_model_state()
-                  , 1500
+                  , @auto_play_turn_time / 2
 
                 @update_model_state @model.getState()
 
-            , 750
+            , @auto_play_turn_time / 4
 
             # For now, just update the state of that door
             @current_model_state.door_list.doors[value] = door_result_state.door            
@@ -87,6 +87,9 @@ define [
             # Save the score if it's game over
             if door_result_state.game_over
               @high_score_data.saveGameInformation @model.getState()
+
+              # Start a new game if we're in auto play mode
+              setTimeout @initialize, 1000 if @auto_play_state.active
 
         when 'reset_doors'
           
@@ -98,7 +101,7 @@ define [
           setTimeout =>
             @recent_state.reset = false
             @update_model_state()
-          , 1500
+          , @auto_play_turn_time / 2
           
         when 'toggle'
 
@@ -126,9 +129,9 @@ define [
               clearInterval @auto_play_timer if @auto_play_timer?
               @auto_play_timer = null
             when 'faster'
-              @auto_play_turn_time *= .75
+              @auto_play_turn_time *= .9
             when 'slower'
-              @auto_play_turn_time /= .75
+              @auto_play_turn_time /= .9
           
           @update_model_state()
 
